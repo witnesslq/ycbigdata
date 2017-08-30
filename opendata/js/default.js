@@ -1,4 +1,21 @@
-$(function () {
+$(function() {
+    // $.ajax({
+    //     type: "POST",
+    //     url: "test.php",
+    //     data: {
+    //         name: 'oliver',
+    //         age: 12
+    //     },
+    //     success: function (data) {
+
+    //     },
+    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+    //     }
+    // });
+
+
+
     var chartOne = echarts.init(document.getElementById('chartone'));
     var optionOne = {
         charttype: '堆叠区域图',
@@ -41,50 +58,45 @@ $(function () {
             type: 'value'
         }],
         series: [{
-                name: '邮件营销',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {
-                    normal: {}
-                },
-                data: [120, 132, 101, 134, 90, 230, 210]
+            name: '邮件营销',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {
+                normal: {}
             },
-            {
-                name: '视频广告',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {
-                    normal: {}
-                },
-                data: [150, 232, 201, 154, 190, 330, 410]
+            data: [120, 132, 101, 134, 90, 230, 210]
+        }, {
+            name: '视频广告',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {
+                normal: {}
             },
-            {
-                name: '直接访问',
-                type: 'line',
-                stack: '总量',
-                areaStyle: {
-                    normal: {}
-                },
-                data: [320, 332, 301, 334, 390, 330, 320]
+            data: [150, 232, 201, 154, 190, 330, 410]
+        }, {
+            name: '直接访问',
+            type: 'line',
+            stack: '总量',
+            areaStyle: {
+                normal: {}
             },
-            {
-                name: '搜索引擎',
-                type: 'line',
-                stack: '总量',
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-                },
-                areaStyle: {
-                    normal: {}
-                },
-                data: [820, 932, 901, 934, 1290, 1330, 1320]
-            }
-        ]
+            data: [320, 332, 301, 334, 390, 330, 320]
+        }, {
+            name: '搜索引擎',
+            type: 'line',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            areaStyle: {
+                normal: {}
+            },
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }]
     };
-
     var chartTwo = echarts.init(document.getElementById('charttwo'));
     var optionTwo = {
         charttype: '富文本标签',
@@ -114,27 +126,22 @@ $(function () {
             center: ['50%', '50%'],
             selectedMode: 'single',
             data: [{
-                    value: 1548,
-                    name: '幽州'
+                value: 1548,
+                name: '幽州'
 
-                },
-                {
-                    value: 535,
-                    name: '荆州'
-                },
-                {
-                    value: 510,
-                    name: '兖州'
-                },
-                {
-                    value: 634,
-                    name: '益州'
-                },
-                {
-                    value: 735,
-                    name: '西凉'
-                }
-            ],
+            }, {
+                value: 535,
+                name: '荆州'
+            }, {
+                value: 510,
+                name: '兖州'
+            }, {
+                value: 634,
+                name: '益州'
+            }, {
+                value: 735,
+                name: '西凉'
+            }],
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -169,100 +176,88 @@ $(function () {
             data: ['展现', '点击', '访问', '咨询', '订单']
         },
         series: [{
-                name: '预期',
-                type: 'funnel',
-                left: '10%',
-                width: '70%',
-                label: {
-                    normal: {
-                        formatter: '{b}预期'
-                    },
-                    emphasis: {
-                        position: 'inside',
-                        formatter: '{b}预期: {c}%'
-                    }
+            name: '预期',
+            type: 'funnel',
+            left: '10%',
+            width: '70%',
+            label: {
+                normal: {
+                    formatter: '{b}预期'
                 },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        opacity: 0.7
-                    }
-                },
-                data: [{
-                        value: 60,
-                        name: '访问'
-                    },
-                    {
-                        value: 40,
-                        name: '咨询'
-                    },
-                    {
-                        value: 20,
-                        name: '订单'
-                    },
-                    {
-                        value: 80,
-                        name: '点击'
-                    },
-                    {
-                        value: 100,
-                        name: '展现'
-                    }
-                ]
+                emphasis: {
+                    position: 'inside',
+                    formatter: '{b}预期: {c}%'
+                }
             },
-            {
-                name: '实际',
-                type: 'funnel',
-                left: '10%',
-                width: '70%',
-                maxSize: '80%',
-                label: {
-                    normal: {
-                        position: 'inside',
-                        formatter: '{c}%',
-                        textStyle: {
-                            color: '#fff'
-                        }
-                    },
-                    emphasis: {
-                        position: 'inside',
-                        formatter: '{b}实际: {c}%'
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    opacity: 0.7
+                }
+            },
+            data: [{
+                value: 60,
+                name: '访问'
+            }, {
+                value: 40,
+                name: '咨询'
+            }, {
+                value: 20,
+                name: '订单'
+            }, {
+                value: 80,
+                name: '点击'
+            }, {
+                value: 100,
+                name: '展现'
+            }]
+        }, {
+            name: '实际',
+            type: 'funnel',
+            left: '10%',
+            width: '70%',
+            maxSize: '80%',
+            label: {
+                normal: {
+                    position: 'inside',
+                    formatter: '{c}%',
+                    textStyle: {
+                        color: '#fff'
                     }
                 },
-                itemStyle: {
-                    normal: {
-                        opacity: 0.5,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    }
-                },
-                data: [{
-                        value: 30,
-                        name: '访问'
-                    },
-                    {
-                        value: 10,
-                        name: '咨询'
-                    },
-                    {
-                        value: 5,
-                        name: '订单'
-                    },
-                    {
-                        value: 50,
-                        name: '点击'
-                    },
-                    {
-                        value: 80,
-                        name: '展现'
-                    }
-                ]
-            }
-        ]
+                emphasis: {
+                    position: 'inside',
+                    formatter: '{b}实际: {c}%'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    opacity: 0.5,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }
+            },
+            data: [{
+                value: 30,
+                name: '访问'
+            }, {
+                value: 10,
+                name: '咨询'
+            }, {
+                value: 5,
+                name: '订单'
+            }, {
+                value: 50,
+                name: '点击'
+            }, {
+                value: 80,
+                name: '展现'
+            }]
+        }]
     };
 
     var chartFour = echarts.init(document.getElementById('chartfour'));
@@ -291,7 +286,7 @@ $(function () {
     }];
 
     // Generate mock data
-    echarts.util.each(categories, function (category, index) {
+    echarts.util.each(categories, function(category, index) {
         var baseTime = startTime;
         for (var i = 0; i < dataCount; i++) {
             var typeItem = types[Math.round(Math.random() * (types.length - 1))];
@@ -335,7 +330,7 @@ $(function () {
             }),
             style: api.style(),
             onmouseover: () => {
-                console.log("asdfasdf")
+
             }
         };
     }
@@ -344,7 +339,7 @@ $(function () {
     var optionFour = {
         charttype: '轮廓展示图',
         tooltip: {
-            formatter: function (params) {
+            formatter: function(params) {
                 return params.marker + params.name + ': ' + params.value[3] + ' ms';
             }
         },
@@ -394,7 +389,7 @@ $(function () {
             min: startTime,
             scale: true,
             axisLabel: {
-                formatter: function (val) {
+                formatter: function(val) {
                     return Math.max(0, val - startTime) + ' ms';
                 }
             }
@@ -417,11 +412,12 @@ $(function () {
             data: data
         }]
     };
+
     chartOne.setOption(optionOne);
     chartTwo.setOption(optionTwo);
     chartThree.setOption(optionThree);
     chartFour.setOption(optionFour);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chartOne.resize();
         chartTwo.resize();
         chartThree.resize();

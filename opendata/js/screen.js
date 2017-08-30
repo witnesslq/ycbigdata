@@ -1,30 +1,5 @@
-$(function () {
+$(function() {
     var chart1 = echarts.init(document.getElementById('chart1'));
-    var xAxisData = [];
-    var data1 = [];
-    var data2 = [];
-    var data3 = [];
-    var data4 = [];
-
-    for (var i = 0; i < 10; i++) {
-        xAxisData.push('Class' + i);
-        data1.push((Math.random() * 2).toFixed(2));
-        data2.push(-Math.random().toFixed(2));
-        data3.push((Math.random() * 5).toFixed(2));
-        data4.push((Math.random() + 0.3).toFixed(2));
-    }
-
-    var itemStyle = {
-        normal: {},
-        emphasis: {
-            barBorderWidth: 1,
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowColor: 'rgba(0,0,0,0.5)'
-        }
-    };
-
     var option1 = {
         charttype: '柱状图',
         title: {
@@ -43,10 +18,6 @@ $(function () {
             align: 'left',
             left: 10
         },
-        // brush: {
-        //     toolbox: ['rect', 'polygon', 'lineX', 'lineY', 'keep', 'clear'],
-        //     xAxisIndex: 0
-        // },
         toolbox: {
             feature: {
                 magicType: {
@@ -57,7 +28,7 @@ $(function () {
         },
         tooltip: {},
         xAxis: {
-            data: xAxisData,
+            data: ["Class0", "Class1", "Class2", "Class3", "Class4", "Class5", "Class6", "Class7", "Class8", "Class9"],
             name: 'X轴',
             silent: false,
             axisLine: {
@@ -103,63 +74,73 @@ $(function () {
             }
         },
         series: [{
-                name: 'bar',
-                type: 'bar',
-                stack: 'one',
-                itemStyle: itemStyle,
-                data: data1
+            name: 'bar',
+            type: 'bar',
+            stack: 'one',
+            itemStyle: {
+                normal: {},
+                emphasis: {
+                    barBorderWidth: 1,
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: 'rgba(0,0,0,0.5)'
+                }
             },
-            {
-                name: 'bar2',
-                type: 'bar',
-                stack: 'one',
-                itemStyle: itemStyle,
-                data: data2
+            // 柱状图：负数是在x轴上面，正数是在x轴下面
+            data: [1.61, 1.28, 0.98, 0.85, 0.25, 1.12, 1.27, 1.08, 0.39, 0.62]
+        }, {
+            name: 'bar2',
+            type: 'bar',
+            stack: 'one',
+            itemStyle: {
+                normal: {},
+                emphasis: {
+                    barBorderWidth: 1,
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: 'rgba(0,0,0,0.5)'
+                }
             },
-            {
-                name: 'bar3',
-                type: 'bar',
-                stack: 'two',
-                itemStyle: itemStyle,
-                data: data3
+            // 柱状图：负数是在x轴上面，正数是在x轴下面
+            data: [-0.46, -0.17, -0.09, -0.74, -0.38, -0.94, -0.29, -0.79, -0.95, -0.21]
+        }, {
+            name: 'bar3',
+            type: 'bar',
+            stack: 'two',
+            itemStyle: {
+                normal: {},
+                emphasis: {
+                    barBorderWidth: 1,
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: 'rgba(0,0,0,0.5)'
+                }
             },
-            {
-                name: 'bar4',
-                type: 'bar',
-                stack: 'two',
-                itemStyle: itemStyle,
-                data: data4
-            }
-        ]
+            // 柱状图：负数是在x轴上面，正数是在x轴下面
+            data: [4.97, 2.09, 2.88, 2.95, 2.64, 3.70, 3.63, 1.00, 4.75, 3.88]
+        }, {
+            name: 'bar4',
+            type: 'bar',
+            stack: 'two',
+            itemStyle: {
+                normal: {},
+                emphasis: {
+                    barBorderWidth: 1,
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: 'rgba(0,0,0,0.5)'
+                }
+            },
+            // 柱状图：负数是在x轴上面，正数是在x轴下面
+            data: [0.38, 0.37, 0.93, 0.32, 1.16, 0.33, 0.39, 0.71, 0.69, 0.37]
+        }]
     };
-
-    // chartOne.on('brushSelected', renderBrushed);
-
-    // function renderBrushed(params) {
-    //     var brushed = [];
-    //     var brushComponent = params.batch[0];
-
-    //     for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
-    //         var rawIndices = brushComponent.selected[sIdx].dataIndex;
-    //         brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
-    //     }
-
-    //     chartOne.setOption({
-    //         title: {
-    //             backgroundColor: '#333',
-    //             text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
-    //             bottom: 0,
-    //             right: 0,
-    //             width: 100,
-    //             textStyle: {
-    //                 fontSize: 12,
-    //                 color: '#fff'
-    //             }
-    //         }
-    //     });
-    // }
     chart1.setOption(option1);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart1.resize();
     });
 
@@ -213,7 +194,7 @@ $(function () {
     };
 
     chart2.setOption(option2);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart2.resize();
     });
 
@@ -233,63 +214,50 @@ $(function () {
         },
         tooltip: {},
         legend: {
-            data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+            data: ['预算分配', '实际开销']
         },
         radar: {
-            // shape: 'circle',
-            radius: '65%',
+            radius: '63%',
             name: {
                 textStyle: {
-                    color: '#fff',
-                    backgroundColor: '#999',
-                    borderRadius: 3,
-                    padding: [3, 5]
+                    color: '#999'
                 }
             },
             indicator: [{
-                    name: '销售（sales）',
-                    max: 6500
-                },
-                {
-                    name: '管理（Administration）',
-                    max: 16000
-                },
-                {
-                    name: '信息技术（Information Techology）',
-                    max: 30000
-                },
-                {
-                    name: '客服（Customer Support）',
-                    max: 38000
-                },
-                {
-                    name: '研发（Development）',
-                    max: 52000
-                },
-                {
-                    name: '市场（Marketing）',
-                    max: 25000
-                }
-            ]
+                name: '销售',
+                max: 6500
+            }, {
+                name: '管理',
+                max: 16000
+            }, {
+                name: '信息技术',
+                max: 30000
+            }, {
+                name: '客服',
+                max: 38000
+            }, {
+                name: '研发',
+                max: 52000
+            }, {
+                name: '市场',
+                max: 25000
+            }]
         },
         series: [{
-            name: '预算 vs 开销（Budget vs spending）',
+            name: '预算 vs 开销',
             type: 'radar',
-            // areaStyle: {normal: {}},
             data: [{
-                    value: [4300, 10000, 28000, 35000, 50000, 19000],
-                    name: '预算分配（Allocated Budget）'
-                },
-                {
-                    value: [5000, 14000, 28000, 31000, 42000, 21000],
-                    name: '实际开销（Actual Spending）'
-                }
-            ]
+                value: [4300, 10000, 28000, 35000, 50000, 19000],
+                name: '预算分配'
+            }, {
+                value: [5000, 14000, 28000, 31000, 42000, 21000],
+                name: '实际开销'
+            }]
         }]
     };
 
     chart3.setOption(option3);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart3.resize();
     });
 
@@ -311,239 +279,205 @@ $(function () {
             formatter: "{a} <br/>{c} {b}"
         },
         series: [{
-                name: '速度',
-                type: 'gauge',
-                z: 3,
-                min: 0,
-                max: 220,
-                splitNumber: 11,
-                radius: '60%',
-                axisLine: { // 坐标轴线
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        width: 10
-                    }
-                },
-                axisTick: { // 坐标轴小标记
-                    length: 15, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        color: 'auto'
-                    }
-                },
-                splitLine: { // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        color: 'auto'
-                    }
-                },
-                axisLabel: {
-                    backgroundColor: 'auto',
-                    borderRadius: 2,
-                    color: '#eee',
-                    padding: 3,
-                    textShadowBlur: 2,
-                    textShadowOffsetX: 1,
-                    textShadowOffsetY: 1,
-                    textShadowColor: '#222'
-                },
-                title: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic'
-                },
-                detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    // formatter: function (value) {
-                    //     value = (value + '').split('.');
-                    //     value.length < 2 && (value.push('00'));
-                    //     return ('00' + value[0]).slice(-2) +
-                    //         '.' + (value[1] + '00').slice(0, 2);
-                    // },
-                    textStyle: {       
-                        fontWeight: 'bolder',
-                        // fontSize:22
-                    },
-                    // fontWeight: 'bolder',
-                    // borderRadius: 3,
-                    // backgroundColor: '#444',
-                    // borderColor: '#aaa',
-                    // shadowBlur: 5,
-                    // shadowColor: '#333',
-                    // shadowOffsetX: 0,
-                    // shadowOffsetY: 3,
-                    // borderWidth: 2,
-                    // textBorderColor: '#000',
-                    // textBorderWidth: 2,
-                    // textShadowBlur: 2,
-                    // textShadowColor: '#fff',
-                    // textShadowOffsetX: 0,
-                    // textShadowOffsetY: 0,
-                    // fontFamily: 'Arial',
-                    // width: 90,
-                    // color: '#eee',
-                    // rich: {}
-                },
-                data: [{
-                    value: 40,
-                    name: 'km/h'
-                }]
+            name: '速度',
+            type: 'gauge',
+            z: 3,
+            min: 0,
+            max: 220,
+            splitNumber: 11,
+            radius: '60%',
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 10
+                }
             },
-            {
-                name: '转速',
-                type: 'gauge',
-                center: ['20%', '55%'], // 默认全局居中
-                radius: '45%',
-                min: 0,
-                max: 7,
-                endAngle: 45,
-                splitNumber: 7,
-                axisLine: { // 坐标轴线
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        width: 8
-                    }
-                },
-                axisTick: { // 坐标轴小标记
-                    length: 12, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        color: 'auto'
-                    }
-                },
-                splitLine: { // 分隔线
-                    length: 20, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        color: 'auto'
-                    }
-                },
-                pointer: {
-                    width: 5
-                },
-                title: {
-                    offsetCenter: [0, '-30%'], // x, y，单位px
-                },
-                detail: {
-                    // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+            axisTick: { // 坐标轴小标记
+                length: 15, // 属性length控制线长
+                lineStyle: { // 属性lineStyle控制线条样式
+                    color: 'auto'
+                }
+            },
+            splitLine: { // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'auto'
+                }
+            },
+            axisLabel: {
+                backgroundColor: 'auto',
+                borderRadius: 2,
+                color: '#eee',
+                padding: 3,
+                textShadowBlur: 2,
+                textShadowOffsetX: 1,
+                textShadowOffsetY: 1,
+                textShadowColor: '#222'
+            },
+            title: {
+                fontWeight: 'bolder',
+                fontSize: 20,
+                fontStyle: 'italic'
+            },
+            detail: {
+                textStyle: {
                     fontWeight: 'bolder'
-                },
-                data: [{
-                    value: 1.5,
-                    name: 'r/min'
-                }]
+                }
             },
-            {
-                name: '油表',
-                type: 'gauge',
-                center: ['77%', '50%'], // 默认全局居中
-                radius: '40%',
-                min: 0,
-                max: 2,
-                startAngle: 135,
-                endAngle: 45,
-                splitNumber: 2,
-                axisLine: { // 坐标轴线
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        width: 8
-                    }
-                },
-                axisTick: { // 坐标轴小标记
-                    splitNumber: 5,
-                    length: 10, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        color: 'auto'
-                    }
-                },
-                axisLabel: {
-                    formatter: function (v) {
-                        switch (v + '') {
-                            case '0':
-                                return 'E';
-                            case '1':
-                                return 'Gas';
-                            case '2':
-                                return 'F';
-                        }
-                    }
-                },
-                splitLine: { // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        color: 'auto'
-                    }
-                },
-                pointer: {
-                    width: 2
-                },
-                title: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                data: [{
-                    value: 0.5,
-                    name: 'gas'
-                }]
+            data: [{
+                value: 40,
+                name: 'km/h'
+            }]
+        }, {
+            name: '转速',
+            type: 'gauge',
+            center: ['20%', '55%'], // 默认全局居中
+            radius: '45%',
+            min: 0,
+            max: 7,
+            endAngle: 45,
+            splitNumber: 7,
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 8
+                }
             },
-            {
-                name: '水表',
-                type: 'gauge',
-                center: ['77%', '50%'], // 默认全局居中
-                radius: '40%',
-                min: 0,
-                max: 2,
-                startAngle: 315,
-                endAngle: 225,
-                splitNumber: 2,
-                axisLine: { // 坐标轴线
-                    lineStyle: { // 属性lineStyle控制线条样式
-                        width: 8
+            axisTick: { // 坐标轴小标记
+                length: 12, // 属性length控制线长
+                lineStyle: { // 属性lineStyle控制线条样式
+                    color: 'auto'
+                }
+            },
+            splitLine: { // 分隔线
+                length: 20, // 属性length控制线长
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'auto'
+                }
+            },
+            pointer: {
+                width: 5
+            },
+            title: {
+                offsetCenter: [0, '-30%'], // x, y，单位px
+            },
+            detail: {
+                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                fontWeight: 'bolder'
+            },
+            data: [{
+                value: 1.5,
+                name: 'r/min'
+            }]
+        }, {
+            name: '油表',
+            type: 'gauge',
+            center: ['77%', '50%'], // 默认全局居中
+            radius: '40%',
+            min: 0,
+            max: 2,
+            startAngle: 135,
+            endAngle: 45,
+            splitNumber: 2,
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 8
+                }
+            },
+            axisTick: { // 坐标轴小标记
+                splitNumber: 5,
+                length: 10, // 属性length控制线长
+                lineStyle: { // 属性lineStyle控制线条样式
+                    color: 'auto'
+                }
+            },
+            axisLabel: {
+                formatter: function(v) {
+                    switch (v + '') {
+                        case '0':
+                            return 'E';
+                        case '1':
+                            return 'Gas';
+                        case '2':
+                            return 'F';
                     }
-                },
-                axisTick: { // 坐标轴小标记
-                    show: false
-                },
-                axisLabel: {
-                    formatter: function (v) {
-                        switch (v + '') {
-                            case '0':
-                                return 'H';
-                            case '1':
-                                return 'Water';
-                            case '2':
-                                return 'C';
-                        }
+                }
+            },
+            splitLine: { // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'auto'
+                }
+            },
+            pointer: {
+                width: 2
+            },
+            title: {
+                show: false
+            },
+            detail: {
+                show: false
+            },
+            data: [{
+                value: 0.5,
+                name: 'gas'
+            }]
+        }, {
+            name: '水表',
+            type: 'gauge',
+            center: ['77%', '50%'], // 默认全局居中
+            radius: '40%',
+            min: 0,
+            max: 2,
+            startAngle: 315,
+            endAngle: 225,
+            splitNumber: 2,
+            axisLine: { // 坐标轴线
+                lineStyle: { // 属性lineStyle控制线条样式
+                    width: 8
+                }
+            },
+            axisTick: { // 坐标轴小标记
+                show: false
+            },
+            axisLabel: {
+                formatter: function(v) {
+                    switch (v + '') {
+                        case '0':
+                            return 'H';
+                        case '1':
+                            return 'Water';
+                        case '2':
+                            return 'C';
                     }
-                },
-                splitLine: { // 分隔线
-                    length: 15, // 属性length控制线长
-                    lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
-                        color: 'auto'
-                    }
-                },
-                pointer: {
-                    width: 2
-                },
-                title: {
-                    show: false
-                },
-                detail: {
-                    show: false
-                },
-                data: [{
-                    value: 0.5,
-                    name: 'gas'
-                }]
-            }
-        ]
+                }
+            },
+            splitLine: { // 分隔线
+                length: 15, // 属性length控制线长
+                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+                    color: 'auto'
+                }
+            },
+            pointer: {
+                width: 2
+            },
+            title: {
+                show: false
+            },
+            detail: {
+                show: false
+            },
+            data: [{
+                value: 0.5,
+                name: 'gas'
+            }]
+        }]
     };
 
     chart4.setOption(option4);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart4.resize();
     });
 
     var chart5 = echarts.init(document.getElementById('chart5'));
-    var cellSize = [50, 50];
-    var pieRadius = 18;
 
     function getVirtulData() {
         var date = +echarts.number.parseDate('2017-02-01');
@@ -560,7 +494,7 @@ $(function () {
     }
 
     function getPieSeries(scatterData, chart) {
-        return echarts.util.map(scatterData, function (item, index) {
+        return echarts.util.map(scatterData, function(item, index) {
             var center = chart.convertToPixel('calendar', item);
             return {
                 id: index + 'pie',
@@ -572,36 +506,54 @@ $(function () {
                         position: 'inside'
                     }
                 },
-                radius: pieRadius,
+                radius: 18,
                 data: [{
-                        name: '工作',
-                        value: Math.round(Math.random() * 24)
-                    },
-                    {
-                        name: '娱乐',
-                        value: Math.round(Math.random() * 24)
-                    },
-                    {
-                        name: '睡觉',
-                        value: Math.round(Math.random() * 24)
-                    }
-                ]
-            };
-        });
-    }
-
-    function getPieSeriesUpdate(scatterData, chart) {
-        return echarts.util.map(scatterData, function (item, index) {
-            var center = chart.convertToPixel('calendar', item);
-            return {
-                id: index + 'pie',
-                center: center
+                    name: '工作',
+                    value: Math.round(Math.random() * 24)
+                }, {
+                    name: '娱乐',
+                    value: Math.round(Math.random() * 24)
+                }, {
+                    name: '睡觉',
+                    value: Math.round(Math.random() * 24)
+                }]
             };
         });
     }
 
     var scatterData = getVirtulData();
-
+    // getVirtulData()生成的就是下面这样的数据
+    // var scatterData = [
+    //     ["2017-02-01", 2788],
+    //     ["2017-02-02", 3788],
+    //     ["2017-02-03", 4788],
+    //     ["2017-02-04", 4520],
+    //     ["2017-02-05", 2872],
+    //     ["2017-02-06", 253],
+    //     ["2017-02-07", 5418],
+    //     ["2017-02-08", 6336],
+    //     ["2017-02-09", 9232],
+    //     ["2017-02-10", 3893],
+    //     ["2017-02-11", 9557],
+    //     ["2017-02-12", 4081],
+    //     ["2017-02-13", 1084],
+    //     ["2017-02-14", 3529],
+    //     ["2017-02-15", 1378],
+    //     ["2017-02-16", 3104],
+    //     ["2017-02-17", 1389],
+    //     ["2017-02-18", 7673],
+    //     ["2017-02-19", 6423],
+    //     ["2017-02-20", 4930],
+    //     ["2017-02-21", 4259],
+    //     ["2017-02-22", 9980],
+    //     ["2017-02-23", 6010],
+    //     ["2017-02-24", 7561],
+    //     ["2017-02-25", 4784],
+    //     ["2017-02-26", 6018],
+    //     ["2017-02-27", 1180],
+    //     ["2017-02-28", 7670]
+    // ];
+    var cellSize = [50, 50];
     var option5 = {
         charttype: '日历饼图',
         title: {
@@ -650,7 +602,7 @@ $(function () {
             label: {
                 normal: {
                     show: true,
-                    formatter: function (params) {
+                    formatter: function(params) {
                         return echarts.format.formatTime('dd', params.value[0]);
                     },
                     offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5],
@@ -665,24 +617,14 @@ $(function () {
     };
 
     if (!chart5.inNode) {
-        var pieInitialized;
-        setTimeout(function () {
-            pieInitialized = true;
+        setTimeout(function() {
             chart5.setOption({
                 series: getPieSeries(scatterData, chart5)
             });
         }, 10);
-
-        chart5.onresize = function () {
-            if (pieInitialized) {
-                chart5.setOption({
-                    series: getPieSeriesUpdate(scatterData, chart5)
-                });
-            }
-        };
     }
     chart5.setOption(option5);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart5.resize();
     });
 
@@ -820,7 +762,7 @@ $(function () {
     };
 
     chart6.setOption(option6);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart6.resize();
     });
 
@@ -995,7 +937,7 @@ $(function () {
         }]
     };
     chart7.setOption(option7);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart7.resize();
     });
 });

@@ -242,6 +242,8 @@
 
             checkButtons();
 
+            $table.find('.addcol').removeClass('disabled');
+
             $(this).parent('th').remove();
 
             $table.find('tbody tr').each(function() {

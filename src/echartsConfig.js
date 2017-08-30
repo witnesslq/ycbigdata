@@ -32,8 +32,8 @@
 var mytable = null;
 
 $(':input[name="blankRadio"]').on('click', function() {
-    var rows = 10;
-    var columns = 10;
+    var rows = 20;
+    var columns = 20;
     // 根据选中的值 更换不同图片提示
     $('#prompt').attr('data-content', '<div class="prompt-content">' +
         '<div class="prompt-left">' +
@@ -52,6 +52,9 @@ $(':input[name="blankRadio"]').on('click', function() {
         rows = 2;
     } else if ($(this).val() === 'type3') {
         rows = 3;
+    } else if ($(this).val() === 'type4') {
+        columns = 11;
+        rows = 7;
     }
     mytable = $('#edittable').editTable({
         maxRows: rows,
@@ -122,7 +125,7 @@ function getType1X(index) {
     return data[index].splice(1);
 }
 
-function getType2Y(index) {
+function getType1Y(index) {
     if (typeof index === 'undefined') {
         index = 0;
     }
@@ -156,7 +159,7 @@ function getType1Option() {
             areaStyle: {
                 normal: {}
             },
-            data: getX(i)
+            data: getType1X(i)
         };
         nData.push(obj);
     }
@@ -254,6 +257,236 @@ function getType2Option() {
             }
         }]
     };
+    return option;
+}
+
+function getType3Option() {
+    var data = mytable.getData();
+    var length = data[0].length;
+    var legend = [].concat(data[0]).splice(1);
+    var nData1 = [];
+    var nData2 = [];
+    var arr = [];
+    for (var j = 0; j< data.length; j++) {
+        if (!j) {
+            continue;
+        }
+        arr.push(data[j][0]);
+    }
+    for (var i = 0; i < length; i++) {
+        if (!i) {
+            continue;
+        }
+        var obj1 = {
+            value: data[1][i],
+            name: data[0][i]
+        };
+        var obj2 = {
+            value: data[2][i],
+            name: data[0][i]
+        }
+        nData1.push(obj1);
+        nData2.push(obj2);
+    }
+    var option = {
+        charttype: '漏斗图',
+        title: {
+            text: '用户订单情况访问展示',
+            bottom: 0,
+            left: 'center',
+            textStyle: {
+                fontSize: 14,
+                color: '#999',
+                fontFamily: 'Microsoft YaHei',
+                fontWeight: 'normal'
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        legend: {
+            top: 0,
+            left: 'center',
+            data: legend
+        },
+        series: [{
+                name: arr[0],
+                type: 'funnel',
+                left: '10%',
+                width: '70%',
+                label: {
+                    normal: {
+                        formatter: '{b}' + arr[0]
+                    },
+                    emphasis: {
+                        position: 'inside',
+                        formatter: '{b}' + arr[0] + ': {c}%'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        opacity: 0.7
+                    }
+                },
+                data: nData1
+            },
+            {
+                name: arr[1],
+                type: 'funnel',
+                left: '10%',
+                width: '70%',
+                maxSize: '80%',
+                label: {
+                    normal: {
+                        position: 'inside',
+                        formatter: '{c}%',
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    },
+                    emphasis: {
+                        position: 'inside',
+                        formatter: '{b}' + arr[1] + ': {c}%'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        opacity: 0.5,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }
+                },
+                data: nData2
+            }
+        ]
+    };
+    return option;
+}
+
+function getType4Option() {
+    var data = mytable.getData();
+    var length = data.length;
+    var x = getType1X();
+    var y = getType1Y();
+    var y1 = [].concat(y);
+    y1.unshift(1);
+    var nData = [];
+    var num = Math.ceil((length - 1) / 2);
+    for (var i = 0; i < length; i++) {
+        if (!i) {
+            continue;
+        }
+        var stack = '';
+        if (i <= num) {
+            stack = 'one';
+        } else {
+            stack = 'two';
+        }
+        var obj = {
+            name: y1[i],
+            type: 'bar',
+            stack: stack,
+            itemStyle: {
+                normal: {},
+                emphasis: {
+                    barBorderWidth: 1,
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowColor: 'rgba(0,0,0,0.5)'
+                }
+            },
+            data: getType1X(i)
+        };
+        nData.push(obj);
+    }
+
+    var option = {
+        charttype: '柱状图',
+        title: {
+            text: '',
+            bottom: 0,
+            left: 'center',
+            textStyle: {
+                fontSize: 14,
+                color: '#999',
+                fontFamily: 'Microsoft YaHei',
+                fontWeight: 'normal'
+            }
+        },
+        legend: {
+            data: y,
+            align: 'left',
+            left: 10
+        },
+        // brush: {
+        //     toolbox: ['rect', 'polygon', 'lineX', 'lineY', 'keep', 'clear'],
+        //     xAxisIndex: 0
+        // },
+        toolbox: {
+            feature: {
+                magicType: {
+                    type: ['stack', 'tiled']
+                },
+                dataView: {}
+            }
+        },
+        tooltip: {},
+        xAxis: {
+            data: x,
+            name: 'X轴',
+            silent: false,
+            axisLine: {
+                onZero: true
+            },
+            splitLine: {
+                show: false
+            },
+            splitArea: {
+                show: false
+            }
+        },
+        yAxis: {
+            inverse: true,
+            splitArea: {
+                show: false
+            }
+        },
+        grid: {
+            left: 100
+        },
+        visualMap: {
+            type: 'continuous',
+            dimension: 1,
+            text: ['High', 'Low'],
+            inverse: true,
+            itemHeight: 200,
+            calculable: true,
+            min: -2,
+            max: 6,
+            top: 60,
+            left: 10,
+            inRange: {
+                colorLightness: [0.4, 0.8]
+            },
+            outOfRange: {
+                color: '#bbb'
+            },
+            controller: {
+                inRange: {
+                    color: '#2f4554'
+                }
+            }
+        },
+        series: nData
+    };
+
     return option;
 }
 

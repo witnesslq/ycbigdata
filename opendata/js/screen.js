@@ -310,17 +310,6 @@ $(function () {
         tooltip: {
             formatter: "{a} <br/>{c} {b}"
         },
-        // toolbox: {
-        //     show: true,
-        //     feature: {
-        //         restore: {
-        //             show: true
-        //         },
-        //         saveAsImage: {
-        //             show: true
-        //         }
-        //     }
-        // },
         series: [{
                 name: '速度',
                 type: 'gauge',
@@ -328,7 +317,7 @@ $(function () {
                 min: 0,
                 max: 220,
                 splitNumber: 11,
-                radius: '50%',
+                radius: '60%',
                 axisLine: { // 坐标轴线
                     lineStyle: { // 属性lineStyle控制线条样式
                         width: 10
@@ -364,31 +353,35 @@ $(function () {
                 },
                 detail: {
                     // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    formatter: function (value) {
-                        value = (value + '').split('.');
-                        value.length < 2 && (value.push('00'));
-                        return ('00' + value[0]).slice(-2) +
-                            '.' + (value[1] + '00').slice(0, 2);
+                    // formatter: function (value) {
+                    //     value = (value + '').split('.');
+                    //     value.length < 2 && (value.push('00'));
+                    //     return ('00' + value[0]).slice(-2) +
+                    //         '.' + (value[1] + '00').slice(0, 2);
+                    // },
+                    textStyle: {       
+                        fontWeight: 'bolder',
+                        // fontSize:22
                     },
-                    fontWeight: 'bolder',
-                    borderRadius: 3,
-                    backgroundColor: '#444',
-                    borderColor: '#aaa',
-                    shadowBlur: 5,
-                    shadowColor: '#333',
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 3,
-                    borderWidth: 2,
-                    textBorderColor: '#000',
-                    textBorderWidth: 2,
-                    textShadowBlur: 2,
-                    textShadowColor: '#fff',
-                    textShadowOffsetX: 0,
-                    textShadowOffsetY: 0,
-                    fontFamily: 'Arial',
-                    width: 100,
-                    color: '#eee',
-                    rich: {}
+                    // fontWeight: 'bolder',
+                    // borderRadius: 3,
+                    // backgroundColor: '#444',
+                    // borderColor: '#aaa',
+                    // shadowBlur: 5,
+                    // shadowColor: '#333',
+                    // shadowOffsetX: 0,
+                    // shadowOffsetY: 3,
+                    // borderWidth: 2,
+                    // textBorderColor: '#000',
+                    // textBorderWidth: 2,
+                    // textShadowBlur: 2,
+                    // textShadowColor: '#fff',
+                    // textShadowOffsetX: 0,
+                    // textShadowOffsetY: 0,
+                    // fontFamily: 'Arial',
+                    // width: 90,
+                    // color: '#eee',
+                    // rich: {}
                 },
                 data: [{
                     value: 40,
@@ -399,7 +392,7 @@ $(function () {
                 name: '转速',
                 type: 'gauge',
                 center: ['20%', '55%'], // 默认全局居中
-                radius: '35%',
+                radius: '45%',
                 min: 0,
                 max: 7,
                 endAngle: 45,
@@ -433,14 +426,14 @@ $(function () {
                 },
                 data: [{
                     value: 1.5,
-                    name: 'x1000 r/min'
+                    name: 'r/min'
                 }]
             },
             {
                 name: '油表',
                 type: 'gauge',
                 center: ['77%', '50%'], // 默认全局居中
-                radius: '25%',
+                radius: '40%',
                 min: 0,
                 max: 2,
                 startAngle: 135,
@@ -494,7 +487,7 @@ $(function () {
                 name: '水表',
                 type: 'gauge',
                 center: ['77%', '50%'], // 默认全局居中
-                radius: '25%',
+                radius: '40%',
                 min: 0,
                 max: 2,
                 startAngle: 315,
@@ -549,8 +542,8 @@ $(function () {
     });
 
     var chart5 = echarts.init(document.getElementById('chart5'));
-    var cellSize = [60, 60];
-    var pieRadius = 20;
+    var cellSize = [50, 50];
+    var pieRadius = 18;
 
     function getVirtulData() {
         var date = +echarts.number.parseDate('2017-02-01');
@@ -625,7 +618,7 @@ $(function () {
         tooltip: {},
         legend: {
             data: ['工作', '娱乐', '睡觉'],
-            bottom: 30,
+            bottom: 50,
             right: '10%'
         },
         calendar: {
@@ -660,7 +653,7 @@ $(function () {
                     formatter: function (params) {
                         return echarts.format.formatTime('dd', params.value[0]);
                     },
-                    offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 8],
+                    offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5],
                     textStyle: {
                         color: '#000',
                         fontSize: 12
@@ -893,7 +886,6 @@ $(function () {
                 ['2015/11/08', 10, 'DQ'],
                 ['2015/11/09', 15, 'DQ'],
                 ['2015/11/10', 35, 'DQ'],
-                // ['2015/11/11',38,'DQ'],['2015/11/12',22,'DQ'],['2015/11/13',16,'DQ'],
                 ['2015/11/14', 7, 'DQ'],
                 ['2015/11/15', 2, 'DQ'],
                 ['2015/11/16', 17, 'DQ'],
@@ -906,7 +898,6 @@ $(function () {
                 ['2015/11/23', 32, 'DQ'],
                 ['2015/11/24', 26, 'DQ'],
                 ['2015/11/25', 22, 'DQ'],
-                // ['2015/11/26',16,'DQ'],['2015/11/27',22,'DQ'],['2015/11/28',10,'DQ'],
                 ['2015/11/08', 35, 'TY'],
                 ['2015/11/09', 36, 'TY'],
                 ['2015/11/10', 37, 'TY'],
@@ -943,10 +934,6 @@ $(function () {
                 ['2015/11/20', 40, 'SS'],
                 ['2015/11/21', 34, 'SS'],
                 ['2015/11/22', 28, 'SS'],
-                // ['2015/11/23',26,'SS'],['2015/11/24',37,'SS'],['2015/11/25',41,'SS'],
-                // ['2015/11/26',46,'SS'],['2015/11/27',47,'SS'],['2015/11/28',41,'SS'],
-                // ['2015/11/08',10,'QG'],['2015/11/09',15,'QG'],['2015/11/10',35,'QG'],
-                // ['2015/11/11',38,'QG'],['2015/11/12',22,'QG'],['2015/11/13',16,'QG'],
                 ['2015/11/14', 7, 'QG'],
                 ['2015/11/15', 2, 'QG'],
                 ['2015/11/16', 17, 'QG'],

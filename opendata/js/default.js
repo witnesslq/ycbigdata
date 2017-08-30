@@ -1,6 +1,7 @@
 $(function () {
     var chartOne = echarts.init(document.getElementById('chartone'));
     var optionOne = {
+        charttype: '堆叠区域图',
         title: {
             text: '搜索引擎，邮件营销展示',
             bottom: 0,
@@ -27,7 +28,7 @@ $(function () {
         grid: {
             left: '3%',
             right: '4%',
-            top:40,
+            top: 40,
             bottom: 38,
             containLabel: true
         },
@@ -86,6 +87,7 @@ $(function () {
 
     var chartTwo = echarts.init(document.getElementById('charttwo'));
     var optionTwo = {
+        charttype: '富文本标签',
         title: {
             text: '天气情况统计',
             bottom: 0,
@@ -145,6 +147,7 @@ $(function () {
 
     var chartThree = echarts.init(document.getElementById('chartthree'));
     var optionThree = {
+        charttype: '漏斗图',
         title: {
             text: '用户订单情况访问展示',
             bottom: 0,
@@ -339,6 +342,7 @@ $(function () {
 
 
     var optionFour = {
+        charttype: '轮廓展示图',
         tooltip: {
             formatter: function (params) {
                 return params.marker + params.name + ': ' + params.value[3] + ' ms';
@@ -380,11 +384,11 @@ $(function () {
             filterMode: 'weakFilter'
         }],
         grid: {
-                left: '4%',
-                right: '4%',
-                top:20,
-                bottom: 88,
-                containLabel: true
+            left: '4%',
+            right: '4%',
+            top: 20,
+            bottom: 88,
+            containLabel: true
         },
         xAxis: {
             min: startTime,

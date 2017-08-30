@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>智慧城市展示</title>
@@ -8,79 +8,74 @@
     <link href="css/swiper.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/swiper.min.js"></script>
-    <script src="js/style.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/default.js"></script>
 </head>
+
 <body>
-<div class="header">
-    <div class="inner clearfix">
-        <div class="logo fl"><a href="index.html"><img src="images/logo.png"></a></div>
-        <div class="nav fl">
-            <ul class="clearfix">
-                <li><a href="index.html">数据开放共享</a></li>
-                <li class="active"><a href="index-zhcs.html">智慧城市展示</a></li>
-                <li><a href="index-lt.html">大数据论坛</a></li>
-            </ul>
-        </div>
-        <div class="right-item fr">
-            <ul class="clearfix">
-                <li><a href="#"><img src="images/header-icon1.png" class="jz"></a></li>
-                <li><a href="#"><img src="images/header-icon2.png" class="jz"></a></li>
-                <li><a href="#"><img src="images/header-icon3.png" class="jz"></a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="banner f0"><img src="images/zhcs-banner_02.jpg"></div>
-<div class="main main-box ssyc">
-    <div class="tab-btn tc">
-        <ul class="clearfix">
-            <li class="fl active"><a href="index-ssyc.html">数说银川</a></li>
-            <li class="fl"><a href="index-zhcs.html">智慧银川</a></li>
-        </ul>
-    </div>
-    <div class="ssyc-cont clearfix">
-        <div class="ssyc-left fl">
-            <ul>
-                <li><a href="index-ssyc.html">数说银川<span>></span></a></li>
-                <li class="active"><a href="index-ssyc.html">大数据局动态<span>></span></a></li>
-            </ul>
-        </div>
-        <div class="ssyc-right fr">
-            <div class="twxq">
-                <img src="images/zhyc-img_03.jpg">
-                <p>大数据管理局，将对该市大数据产业发展、集聚大数据资源、挖掘大数据价值、创新大数据应用，推动产业转型升级和经济跨越发展等都将发挥重要作用。</p>
-                <p>据了解，获批成立的银川市大数据社会服务管理局主要职责有6项：研究并组织实施智慧银川建设以及大数据战略、规划和政策措施，引导和推动智慧银川建设以及大数据的研究和应用工作，协调信息资源的互联互通、资源共享；协调、组织实施国家和地方数据技术标准，研究基础信息资源共享交换目录、技术规范和范围；组织实施大数据的标准体系和考核体系，推动大数据形成机制的建立和开发应用；组织实施大数据收集、管理、开放、交易、应用等标准规范；组织实施智慧银川运行管理规范和部件标准；协调全市信息安全保障体系建设等。</p></p>
-            </div>
-            <div class="dt-list">
-                <ul>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                    <li><a href="#">大数据等三大行业十三五规划发布 信息产业收入将破26万亿<time>2017年3月7日</time></a></li>
-                </ul>
-            </div>
-            <div class="page-btn">
+    <div class="header">
+        <div class="inner clearfix">
+            <div class="logo fl"><a href="index.html"><img src="images/logo.png"></a></div>
+            <div class="nav fl">
                 <ul class="clearfix">
-                    <li><a href="#">上一页</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">...1024</a></li>
-                    <li><a href="#">下一页</a></li>
+                    <li><a href="index.html">数据开放共享</a></li>
+                    <li class="active"><a href="index-zhcs.html">智慧城市展示</a></li>
+                    <li><a href="index-lt.html">大数据论坛</a></li>
+                </ul>
+            </div>
+            <div class="right-item fr">
+                <ul class="clearfix">
+                    <li><a href="#"><img src="images/header-icon1.png" class="jz"></a></li>
+                    <li><a href="#"><img src="images/header-icon2.png" class="jz"></a></li>
+                    <li><a href="#"><img src="images/header-icon3.png" class="jz"></a></li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
+    <div class="banner f0"><img src="images/zhcs-banner_02.jpg"></div>
+    <div class="main main-box ssyc">
+        <div class="tab-btn tc">
+            <ul class="clearfix">
+                <li class="fl active"><a href="index-ssyc.html">数说银川</a></li>
+                <li class="fl"><a href="index-zhcs.html">智慧银川</a></li>
+            </ul>
+        </div>
+        <div class="ssyc-cont clearfix">
+            <!-- 新增 -->
+            <div class="ssyc-chartgroup clearfix">
+                <div>
+                    <div class="chart-title">
+                        <p>堆叠区域图</p>
+                    </div>
+                    <div class="e-chart" id="chartone"></div>
+                </div>
+                <div>
+                    <div class="chart-title">
+                        <p>富文本标签</p>
+                    </div>
+                    <div class="e-chart" id="charttwo"></div>
+                </div>
+                <div>
+                    <div class="chart-title">
+                        <p>漏斗图</p>
+                    </div>
+                    <div class="e-chart" id="chartthree"></div>
+                </div>
+            </div>
+            <div class="chart-four clearfix">
+                <div class="chart-title">
+                    <p>轮廓展示图</p>
+                </div>
+                <div id="chartfour"> </div>
+            </div>
+            <div class="ssyc-explain clearfix">
+                <p>银川市，简称“银”，是宁夏回族自治区的首府，国家历史文化名城，西北地区重要的中心城市。全区军事、政治、经济、文化科研、交通和金融商业中心，以发展轻纺工业为主，机械、化工、建材工业协调发展的综合性工业城市。银川地处中国西北地区宁夏平原中部，西倚贺兰山、东临黄河，是发展中的区域性中心城市，中国-阿拉伯国家博览会的永久举办地。</p>
+                <p>银川是历史悠久的塞上古城，早在3万年前就有人类在水洞沟遗址繁衍生息，史上西夏王朝的首都，是国家历史文化名城，民间传说中又称“凤凰城”，古称“兴庆府”、“宁夏城”，素有“塞上江南、鱼米之乡”的美誉，城西有著名的国家级风景区西夏王陵。</p>
+                <p>城市综合竞争力跻身全国百强，荣获全国文明城市、国家节水型城市、国家卫生城市、国家园林城市、国家环保模范城市、中国人居环境范例奖等殊荣，被评为“中国十大新天府”。</p>
+            </div>
+            <!-- 新增 -->
+        </div>
+    </div>
 </body>
+
 </html>

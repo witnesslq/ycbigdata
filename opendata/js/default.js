@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     var chartOne = echarts.init(document.getElementById('chartone'));
     var optionOne = {
         charttype: '堆叠区域图',
@@ -71,12 +71,6 @@ $(function () {
                 name: '搜索引擎',
                 type: 'line',
                 stack: '总量',
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top'
-                    }
-                },
                 areaStyle: {
                     normal: {}
                 },
@@ -291,7 +285,7 @@ $(function () {
     }];
 
     // Generate mock data
-    echarts.util.each(categories, function (category, index) {
+    echarts.util.each(categories, function(category, index) {
         var baseTime = startTime;
         for (var i = 0; i < dataCount; i++) {
             var typeItem = types[Math.round(Math.random() * (types.length - 1))];
@@ -344,7 +338,7 @@ $(function () {
     var optionFour = {
         charttype: '轮廓展示图',
         tooltip: {
-            formatter: function (params) {
+            formatter: function(params) {
                 return params.marker + params.name + ': ' + params.value[3] + ' ms';
             }
         },
@@ -394,7 +388,7 @@ $(function () {
             min: startTime,
             scale: true,
             axisLabel: {
-                formatter: function (val) {
+                formatter: function(val) {
                     return Math.max(0, val - startTime) + ' ms';
                 }
             }
@@ -421,7 +415,7 @@ $(function () {
     chartTwo.setOption(optionTwo);
     chartThree.setOption(optionThree);
     chartFour.setOption(optionFour);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chartOne.resize();
         chartTwo.resize();
         chartThree.resize();

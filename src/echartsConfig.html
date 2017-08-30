@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap-table.css">
+    <link rel="stylesheet" href="../assets/css/jquery.edittable.min.css">
     <script src="../assets/js/jquery-latest.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap-table.js"></script>
+    <script src="../assets/js/jquery.edittable.js"></script>
     <style type="text/css">
     .no-radius {
         border-radius: 0;
@@ -19,6 +21,29 @@
     .margin {
         margin: 10px 0;
     }
+
+    .label-position {
+        position: relative;
+    }
+
+    .label-align {
+        margin-right: 90px;
+        margin-bottom: 29px!important;
+    }
+
+    .radio-align {
+        top: 20px;
+    }
+
+    .popover {
+        max-width: 600px!important;
+    }
+
+    #prompt {
+        position: absolute;
+        left: 56px;
+        z-index: 999;
+    }
     </style>
 </head>
 
@@ -26,21 +51,102 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 margin">
-                <button type="button" class="btn btn-success no-radius">添加配置</button>
+                <button type="button" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <table id="table" data-toggle="table" data-click-to-select="true">
+                <table id="table" data-toggle="table">
                     <thead>
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-field="image" data-formatter="imageFormatter">缩列图</th>
                             <th data-field="name">数据</th>
-                            <th data-field="action" data-formatter="actionFormatter">操作</th>
+                            <th data-field="action" data-formatter="actionFormatter" data-row-style="rowStyle">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div id="config_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="config_modal_title">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="myform" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="radios" class="col-sm-2 control-label">类型</label>
+                                <div class="col-sm-10">
+                                    <div id="radios" class="radio">
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type1" value="type1" />
+                                            <image src="../assets/img/icon-type1.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type1.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type2" value="type2">
+                                            <image src="../assets/img/icon-type2.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type2.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type3" value="type3">
+                                            <image src="../assets/img/icon-type3.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type3.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type4" value="type4">
+                                            <image src="../assets/img/icon-type4.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type4.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type5" value="type5">
+                                            <image src="../assets/img/icon-type5.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type5.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type6" value="type6">
+                                            <image src="../assets/img/icon-type6.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type6.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type7" value="type7">
+                                            <image src="../assets/img/icon-type7.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type7.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type8" value="type8">
+                                            <image src="../assets/img/icon-type8.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type8.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type9" value="type9">
+                                            <image src="../assets/img/icon-type9.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type9.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type10" value="type10">
+                                            <image src="../assets/img/icon-type10.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type10.png'></image>"></image>
+                                        </label>
+                                        <label class="label-position label-align">
+                                            <input type="radio" class="radio-align" name="blankRadio" id="type11" value="type11">
+                                            <image src="../assets/img/icon-type11.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type11.png'></image>"></image>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="data" class="form-group" style="display:none">
+                                <button id="prompt" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="提示">提示</button>
+                                <label for="inputPassword3" class="col-sm-2 control-label">数据</label>
+                                <div class="col-sm-10">
+                                    <div id="edittable"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary no-radius" onclick="onSaveClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="prompt" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
             </div>
         </div>
     </div>

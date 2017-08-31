@@ -80,7 +80,7 @@ $(function () {
             data: [820, 932, 901, 934, 1290, 1330, 1320]
         }]
     };
-    // var chartTwo = echarts.init(document.getElementById('charttwo'));
+    var chartTwo = echarts.init(document.getElementById('charttwo'));
     var optionTwo = {
         charttype: '富文本标签',
         title: {
@@ -401,23 +401,23 @@ var numberi=0;
 
     
     chartOne.setOption(optionOne);
-   
+    chartTwo.setOption(optionTwo);
     chartThree.setOption(optionThree);
     chartFour.setOption(optionFour);
 
-    $.ajax({
-        type: "GET",
-        url: "http://172.16.1.232:8088/echarts/get/-1/0",
-        data: {},
-        success: function (data) {
-            console.log(data.data[1].json);
-            var chartTwo = echarts.init(document.getElementById('charttwo'));
-            // chartTwo.setOption(data.data[0].json);
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+    // $.ajax({
+    //     type: "GET",
+    //     url: "http://172.16.1.232:8088/echarts/get/-1/0",
+    //     data: {},
+    //     success: function (data) {
+    //         console.log(data.data[1].json);
+    //         var chartTwo = echarts.init(document.getElementById('charttwo'));
+    //         // chartTwo.setOption(data.data[0].json);
+    //     },
+    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-        }
-    });
+    //     }
+    // });
 
 
 

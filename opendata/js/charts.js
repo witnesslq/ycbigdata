@@ -56,11 +56,8 @@ $(function () {
     }
 
     function getPieSeries(Data,scatter,dateArr, chart) {
-        console.log(Data.data)
         var piedata = echarts.util.map(Data.data, function (item, index) {
-            console.log(item)
             var center = chart.convertToPixel('calendar', dateArr[index]);
-                    console.log(center)
             return {
                 id: index + 'pie', // 每个饼图的id不一样
                 type: 'pie',
@@ -105,33 +102,45 @@ $(function () {
             },
             data: Data.data
         });
-        console.log('piedata:', piedata);
         return piedata
     }
 
-    // console.log(getNextMonth('2017-12-01'));
+    function dateBar(option){
+        $('#charttwotitle').text(option.charttype)
+        var date= option.date+'-01';
+        var dateArr=getVirtulData(date, getNextMonth(date));
+        chartTwo.setOption(option);
+        if (!chartTwo.inNode) {
+            setTimeout(function () {
+                chartTwo.setOption({
+                    series: getPieSeries(option,option.legend.data,dateArr,chartTwo)
+                });
+            }, 10);
+        }
+    }
     
     $.ajax({
         type: "GET",
         url: "http://172.16.1.232:8088/echarts/get/-1/0",
         data: {},
         success: function (data) {
-            var date= data.data[3].json.date+'-01';
-            var dateArr=getVirtulData(date, getNextMonth(date));
-            chartTwo.setOption(data.data[3].json);
-            if (!chartTwo.inNode) {
-                setTimeout(function () {
-                    chartTwo.setOption({
-                        series: getPieSeries(data.data[3].json,data.data[3].json.legend.data,dateArr,chartTwo)
-                    });
-                }, 10);
-            }
+            dateBar(data.data[3].json);
+            // var date= data.data[3].json.date+'-01';
+            // var dateArr=getVirtulData(date, getNextMonth(date));
+            // chartTwo.setOption(data.data[3].json);
+            // if (!chartTwo.inNode) {
+            //     setTimeout(function () {
+            //         chartTwo.setOption({
+            //             series: getPieSeries(data.data[3].json,data.data[3].json.legend.data,dateArr,chartTwo)
+            //         });
+            //     }, 10);
+            // }
             // var series=getPieSeries(data.data[3].json,data.data[3].json.legend.data,chartTwo);
             // data.data[3].json.series=series;
-            console.log(data.data[3].json);
+            // console.log(data.data[3].json);
 
             
-            // chartOne.setOption(optionOne);
+            chartOne.setOption(data.data[0].json);
             //  chartThree.setOption(optionThree);
             //  chartFour.setOption(optionFour);
         },

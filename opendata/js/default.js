@@ -265,6 +265,7 @@ $(function() {
     var dataCount = 10;
     var startTime = +new Date();
     var categories = ['目录A', '目录B', '目录C'];
+    // 六种类型，和每种类型对应的颜色
     var types = [{
         name: 'JS Heap',
         color: '#7b9ce1'

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var chart1 = echarts.init(document.getElementById('chart1'));
     var option1 = {
         charttype: '柱状图',
@@ -140,7 +140,7 @@ $(function() {
         }]
     };
     chart1.setOption(option1);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart1.resize();
     });
 
@@ -194,7 +194,7 @@ $(function() {
     };
 
     chart2.setOption(option2);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart2.resize();
     });
 
@@ -257,7 +257,7 @@ $(function() {
     };
 
     chart3.setOption(option3);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart3.resize();
     });
 
@@ -265,7 +265,7 @@ $(function() {
     var option4 = {
         charttype: '仪表盘',
         title: {
-            text: '速度，转速，水量展示',
+            text: '速度，转速，水量展示', // 表的title，可修改
             bottom: 0,
             left: 'center',
             textStyle: {
@@ -278,6 +278,7 @@ $(function() {
         tooltip: {
             formatter: "{a} <br/>{c} {b}"
         },
+        //仪表盘，单位和name可能需要做成可修改的
         series: [{
             name: '速度',
             type: 'gauge',
@@ -286,20 +287,20 @@ $(function() {
             max: 220,
             splitNumber: 11,
             radius: '60%',
-            axisLine: { // 坐标轴线
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisLine: {
+                lineStyle: {
                     width: 10
                 }
             },
-            axisTick: { // 坐标轴小标记
-                length: 15, // 属性length控制线长
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisTick: {
+                length: 15,
+                lineStyle: {
                     color: 'auto'
                 }
             },
-            splitLine: { // 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+            splitLine: {
+                length: 20,
+                lineStyle: {
                     color: 'auto'
                 }
             },
@@ -330,26 +331,26 @@ $(function() {
         }, {
             name: '转速',
             type: 'gauge',
-            center: ['20%', '55%'], // 默认全局居中
+            center: ['20%', '55%'],
             radius: '45%',
             min: 0,
             max: 7,
             endAngle: 45,
             splitNumber: 7,
-            axisLine: { // 坐标轴线
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisLine: {
+                lineStyle: {
                     width: 8
                 }
             },
-            axisTick: { // 坐标轴小标记
-                length: 12, // 属性length控制线长
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisTick: {
+                length: 12,
+                lineStyle: {
                     color: 'auto'
                 }
             },
-            splitLine: { // 分隔线
-                length: 20, // 属性length控制线长
-                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+            splitLine: {
+                length: 20,
+                lineStyle: {
                     color: 'auto'
                 }
             },
@@ -357,10 +358,9 @@ $(function() {
                 width: 5
             },
             title: {
-                offsetCenter: [0, '-30%'], // x, y，单位px
+                offsetCenter: [0, '-30%'],
             },
             detail: {
-                // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                 fontWeight: 'bolder'
             },
             data: [{
@@ -370,27 +370,27 @@ $(function() {
         }, {
             name: '油表',
             type: 'gauge',
-            center: ['77%', '50%'], // 默认全局居中
+            center: ['77%', '50%'],
             radius: '40%',
             min: 0,
             max: 2,
             startAngle: 135,
             endAngle: 45,
             splitNumber: 2,
-            axisLine: { // 坐标轴线
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisLine: {
+                lineStyle: {
                     width: 8
                 }
             },
-            axisTick: { // 坐标轴小标记
+            axisTick: {
                 splitNumber: 5,
-                length: 10, // 属性length控制线长
-                lineStyle: { // 属性lineStyle控制线条样式
+                length: 10,
+                lineStyle: {
                     color: 'auto'
                 }
             },
             axisLabel: {
-                formatter: function(v) {
+                formatter: function (v) {
                     switch (v + '') {
                         case '0':
                             return 'E';
@@ -401,9 +401,9 @@ $(function() {
                     }
                 }
             },
-            splitLine: { // 分隔线
-                length: 15, // 属性length控制线长
-                lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+            splitLine: {
+                length: 15,
+                lineStyle: {
                     color: 'auto'
                 }
             },
@@ -423,23 +423,23 @@ $(function() {
         }, {
             name: '水表',
             type: 'gauge',
-            center: ['77%', '50%'], // 默认全局居中
+            center: ['77%', '50%'],
             radius: '40%',
             min: 0,
             max: 2,
             startAngle: 315,
             endAngle: 225,
             splitNumber: 2,
-            axisLine: { // 坐标轴线
-                lineStyle: { // 属性lineStyle控制线条样式
+            axisLine: {
+                lineStyle: {
                     width: 8
                 }
             },
-            axisTick: { // 坐标轴小标记
+            axisTick: {
                 show: false
             },
             axisLabel: {
-                formatter: function(v) {
+                formatter: function (v) {
                     switch (v + '') {
                         case '0':
                             return 'H';
@@ -473,33 +473,114 @@ $(function() {
     };
 
     chart4.setOption(option4);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart4.resize();
     });
-
+    /**
+     * 日历饼图
+     */
     var chart5 = echarts.init(document.getElementById('chart5'));
 
-    function getVirtulData() {
-        var date = +echarts.number.parseDate('2017-02-01');
-        var end = +echarts.number.parseDate('2017-03-01');
-        var dayTime = 3600 * 24 * 1000;
-        var data = [];
-        for (var time = date; time < end; time += dayTime) {
-            data.push([
-                echarts.format.formatTime('yyyy-MM-dd', time),
-                Math.floor(Math.random() * 10000)
-            ]);
-        }
-        return data;
-    }
 
+// 生成scatterData
+    // function getVirtulData() {
+    //     var date = +echarts.number.parseDate('2017-02-01');
+    //     var end = +echarts.number.parseDate('2017-03-01');
+    //     var dayTime = 3600 * 24 * 1000;
+    //     var data = [];
+    //     for (var time = date; time < end; time += dayTime) {
+    //         data.push(
+    //             [
+    //                 echarts.format.formatTime('yyyy-MM-dd', time)
+    //             ]
+    //         );
+    //     }
+    //     return data;
+    // }
+
+    var scatterData = [
+        ["2017-02-01", 21, 10, 8],//[日期，工作占比，娱乐占比，睡觉占比]
+        ["2017-02-02", 12, 6, 17],
+        ["2017-02-03", 9, 5, 3],
+        ["2017-02-04", 6, 7, 12],
+        ["2017-02-05", 19, 10, 5],
+        ["2017-02-06", 17, 8, 2],
+        ["2017-02-07", 3, 16, 10],
+        ["2017-02-08", 22, 19, 6],
+        ["2017-02-09", 6, 12, 21],
+        ["2017-02-10", 17, 16, 3],
+        ["2017-02-11", 21, 13, 8],
+        ["2017-02-12", 2, 10, 9],
+        ["2017-02-13", 11, 3, 10],
+        ["2017-02-14", 15, 14, 9],
+        ["2017-02-15", 5, 23, 3],
+        ["2017-02-16", 3, 21, 19],
+        ["2017-02-17", 4, 11, 13],
+        ["2017-02-18", 13, 23, 13],
+        ["2017-02-19", 4, 19, 23],
+        ["2017-02-20", 9, 16, 5],
+        ["2017-02-21", 4, 0, 3],
+        ["2017-02-22", 17, 12, 14],
+        ["2017-02-23", 17, 5, 4],
+        ["2017-02-24", 20, 18, 5],
+        ["2017-02-25", 17, 19, 20],
+        ["2017-02-26", 10, 9, 13],
+        ["2017-02-27", 20, 15, 5],
+        ["2017-02-28", 18, 22, 12]
+    ];
+
+
+    // 生成饼图的数据的函数,数据格式如下
+    // [{
+    //     "id": "0pie",
+    //     "type": "pie",
+    //     "center": [142.5, 65.5],
+    //     "label": {
+    //         "normal": {
+    //             "formatter": "{c}",
+    //             "position": "inside"
+    //         }
+    //     },
+    //     "radius": 18,
+    //     "data": [{
+    //         "name": "工作",
+    //         "value": 19
+    //     }, {
+    //         "name": "娱乐",
+    //         "value": 4
+    //     }, {
+    //         "name": "睡觉",
+    //         "value": 1
+    //     }]
+    // },{
+    //     "id": "1pie",
+    //     "type": "pie",
+    //     "center": [142.5, 65.5],
+    //     "label": {
+    //         "normal": {
+    //             "formatter": "{c}",
+    //             "position": "inside"
+    //         }
+    //     },
+    //     "radius": 18,
+    //     "data": [{
+    //         "name": "工作",
+    //         "value": 19
+    //     }, {
+    //         "name": "娱乐",
+    //         "value": 4
+    //     }, {
+    //         "name": "睡觉",
+    //         "value": 1
+    //     }]
+    // }]
     function getPieSeries(scatterData, chart) {
-        return echarts.util.map(scatterData, function(item, index) {
+        var piedata = echarts.util.map(scatterData, function (item, index) {
             var center = chart.convertToPixel('calendar', item);
             return {
-                id: index + 'pie',
+                id: index + 'pie', // 每个饼图的id不一样
                 type: 'pie',
-                center: center,
+                center: center, // center为一个数组，里面设置了每个饼图的位置，位置数据都不一样
                 label: {
                     normal: {
                         formatter: '{c}',
@@ -507,52 +588,44 @@ $(function() {
                     }
                 },
                 radius: 18,
+                // 各部分活动的占比
                 data: [{
                     name: '工作',
-                    value: Math.round(Math.random() * 24)
+                    value: item[1]
                 }, {
                     name: '娱乐',
-                    value: Math.round(Math.random() * 24)
+                    value: item[2]
                 }, {
                     name: '睡觉',
-                    value: Math.round(Math.random() * 24)
+                    value: item[3]
                 }]
             };
         });
+        piedata.unshift({
+            id: 'label',
+            type: 'scatter',
+            coordinateSystem: 'calendar',
+            symbolSize: 1,
+            label: {
+                normal: {
+                    show: true,
+                    formatter: function (params) {
+                        return echarts.format.formatTime('dd', params.value[0]);
+                    },
+                    offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5],//cellSize=[50, 50],如果固定的话就写死，单元格的宽高
+                    textStyle: {
+                        color: '#000',
+                        fontSize: 12
+                    }
+                }
+            },
+            data: scatterData
+        });
+        console.log('piedata:', piedata);
+        return piedata
     }
 
-    var scatterData = getVirtulData();
-    // getVirtulData()生成的就是下面这样的数据
-    // var scatterData = [
-    //     ["2017-02-01", 2788],
-    //     ["2017-02-02", 3788],
-    //     ["2017-02-03", 4788],
-    //     ["2017-02-04", 4520],
-    //     ["2017-02-05", 2872],
-    //     ["2017-02-06", 253],
-    //     ["2017-02-07", 5418],
-    //     ["2017-02-08", 6336],
-    //     ["2017-02-09", 9232],
-    //     ["2017-02-10", 3893],
-    //     ["2017-02-11", 9557],
-    //     ["2017-02-12", 4081],
-    //     ["2017-02-13", 1084],
-    //     ["2017-02-14", 3529],
-    //     ["2017-02-15", 1378],
-    //     ["2017-02-16", 3104],
-    //     ["2017-02-17", 1389],
-    //     ["2017-02-18", 7673],
-    //     ["2017-02-19", 6423],
-    //     ["2017-02-20", 4930],
-    //     ["2017-02-21", 4259],
-    //     ["2017-02-22", 9980],
-    //     ["2017-02-23", 6010],
-    //     ["2017-02-24", 7561],
-    //     ["2017-02-25", 4784],
-    //     ["2017-02-26", 6018],
-    //     ["2017-02-27", 1180],
-    //     ["2017-02-28", 7670]
-    // ];
+    // 设置每个单元格的大小，如果固定就写死
     var cellSize = [50, 50];
     var option5 = {
         charttype: '日历饼图',
@@ -569,7 +642,7 @@ $(function() {
         },
         tooltip: {},
         legend: {
-            data: ['工作', '娱乐', '睡觉'],
+            data: ['工作', '娱乐', '睡觉'], // 可能需要更改
             bottom: 50,
             right: '10%'
         },
@@ -577,7 +650,7 @@ $(function() {
             top: 'middle',
             left: 'center',
             orient: 'vertical',
-            cellSize: cellSize,
+            cellSize: cellSize,//[50, 50]
             yearLabel: {
                 show: false,
                 textStyle: {
@@ -592,39 +665,20 @@ $(function() {
             monthLabel: {
                 show: false
             },
-            range: ['2017-02']
+            range: ['2017-02'] //这里设置月份，不同的月份日历上的天数也不一样，scatterData里的数据也要为此月份
         },
-        series: [{
-            id: 'label',
-            type: 'scatter',
-            coordinateSystem: 'calendar',
-            symbolSize: 1,
-            label: {
-                normal: {
-                    show: true,
-                    formatter: function(params) {
-                        return echarts.format.formatTime('dd', params.value[0]);
-                    },
-                    offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5],
-                    textStyle: {
-                        color: '#000',
-                        fontSize: 12
-                    }
-                }
-            },
-            data: scatterData
-        }]
+        // series: getPieSeries(scatterData, chart5)
     };
 
     if (!chart5.inNode) {
-        setTimeout(function() {
+        setTimeout(function () {
             chart5.setOption({
                 series: getPieSeries(scatterData, chart5)
             });
         }, 10);
     }
     chart5.setOption(option5);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart5.resize();
     });
 
@@ -762,7 +816,7 @@ $(function() {
     };
 
     chart6.setOption(option6);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart6.resize();
     });
 
@@ -937,7 +991,7 @@ $(function() {
         }]
     };
     chart7.setOption(option7);
-    $(window).resize(function() {
+    $(window).resize(function () {
         chart7.resize();
     });
 });

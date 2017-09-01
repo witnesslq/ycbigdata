@@ -5,14 +5,10 @@
     <meta charset="UTF-8">
     <title>智慧城市展示</title>
     <link href="css/reset.css" rel="stylesheet">
-    <link href="css/swiper.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/echarts.min.js"></script>
-    <!-- 之前4个echarts图标js代码 -->
-    <script src="js/default.js"></script>
-    <!-- 后7个echarts图标的js代码 -->
-    <script src="js/screen.js"></script>
+    <script src="js/charts.js"></script>
 </head>
 
 <body>
@@ -48,74 +44,28 @@
             <div class="ssyc-chartgroup clearfix">
                 <div>
                     <div class="chart-title">
-                        <p>堆叠区域图</p>
+                        <p id="chartonetitle"></p>
                     </div>
                     <div class="e-chart" id="chartone"></div>
                 </div>
                 <div>
                     <div class="chart-title">
-                        <p>富文本标签</p>
+                        <p id="charttwotitle"></p>
                     </div>
                     <div class="e-chart" id="charttwo"></div>
                 </div>
                 <div>
                     <div class="chart-title">
-                        <p>漏斗图</p>
+                        <p id="chartthreetitle"></p>
                     </div>
                     <div class="e-chart" id="chartthree"></div>
                 </div>
             </div>
-            <div class="ssyc-chartgroup clearfix">
-                <div>
-                    <div class="chart-title">
-                        <p>柱状图</p>
-                    </div>
-                    <div class="e-chart" id="chart1"></div>
-                </div>
-                <div>
-                    <div class="chart-title">
-                        <p>极坐标系下的堆叠柱状图</p>
-                    </div>
-                    <div class="e-chart" id="chart2"></div>
-                </div>
-                <div>
-                    <div class="chart-title">
-                        <p>基础雷达图</p>
-                    </div>
-                    <div class="e-chart" id="chart3"></div>
-                </div>
-            </div>
-            <div class="ssyc-chartgroup clearfix">
-                <div>
-                    <div class="chart-title">
-                        <p>仪表盘</p>
-                    </div>
-                    <div class="e-chart" id="chart4"></div>
-                </div>
-                <div>
-                    <div class="chart-title">
-                        <p>日历饼图</p>
-                    </div>
-                    <div class="e-chart" id="chart5"></div>
-                </div>
-                <div>
-                    <div class="chart-title">
-                        <p>象形柱图</p>
-                    </div>
-                    <div class="e-chart" id="chart6"></div>
-                </div>
-            </div>
             <div class="chart-four clearfix">
                 <div class="chart-title">
-                    <p>轮廓展示图</p>
+                    <p id="chartfourtitle"></p>
                 </div>
                 <div id="chartfour"> </div>
-            </div>
-            <div class="chart-four clearfix">
-                <div class="chart-title">
-                    <p>主题河流图</p>
-                </div>
-                <div id="chart7"> </div>
             </div>
             <div class="ssyc-explain clearfix">
                 <p>银川市，简称“银”，是宁夏回族自治区的首府，国家历史文化名城，西北地区重要的中心城市。全区军事、政治、经济、文化科研、交通和金融商业中心，以发展轻纺工业为主，机械、化工、建材工业协调发展的综合性工业城市。银川地处中国西北地区宁夏平原中部，西倚贺兰山、东临黄河，是发展中的区域性中心城市，中国-阿拉伯国家博览会的永久举办地。</p>

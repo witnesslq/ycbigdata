@@ -42,11 +42,11 @@ $(':input[name="blankRadio"]').on('click', function() {
     $('#prompt').attr('data-content', '<div class="prompt-content">' +
         '<div class="prompt-left">' +
         '<div class="prompt-title">填写规范</div>' +
-        '<image src="../assets/img/sample-' + $(this).val() + '.png" width="500px"></image>' +
+        '<image src="./assets/img/sample-' + $(this).val() + '.png" width="500px"></image>' +
         '</div>' +
         '<div class="prompt-right">' +
         '<div class="prompt-title">效果展示</div>' +
-        '<image src="../assets/img/' + $(this).val() + '.png" style="max-width: 500px;"></image>' +
+        '<image src="./assets/img/' + $(this).val() + '.png" style="max-width: 500px;"></image>' +
         '</div>' +
         '</div>');
     if (mytable) {
@@ -179,7 +179,7 @@ function imageFormatter(value, row, index) {
     if (!row.type) {
         row.type = 'type1';
     }
-    return '<image src="../assets/img/icon-' + row.type + '.png" data-toggle="tooltip" data-placement="right" title="<image src=\'../assets/img/' + row.type + '.png\'></image>" width="30px"></image>';
+    return '<image src="./assets/img/icon-' + row.type + '.png" data-toggle="tooltip" data-placement="right" title="<image src=\'./assets/img/' + row.type + '.png\'></image>" width="30px"></image>';
 }
 
 function jsonFormatter(value, row, index) {

@@ -1,21 +1,4 @@
-$(function() {
-    // $.ajax({
-    //     type: "POST",
-    //     url: "test.php",
-    //     data: {
-    //         name: 'oliver',
-    //         age: 12
-    //     },
-    //     success: function (data) {
-
-    //     },
-    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-    //     }
-    // });
-
-
-
+$(function () {
     var chartOne = echarts.init(document.getElementById('chartone'));
     var optionOne = {
         charttype: '堆叠区域图',
@@ -113,7 +96,7 @@ $(function() {
         },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: "{b} : {c} ({d}%)"
         },
         legend: {
             top: 0,
@@ -285,9 +268,9 @@ $(function() {
         name: 'GPU',
         color: '#72b362'
     }];
-
+var numberi=0;
     // Generate mock data
-    echarts.util.each(categories, function(category, index) {
+    echarts.util.each(categories, function (category, index) {
         var baseTime = startTime;
         for (var i = 0; i < dataCount; i++) {
             var typeItem = types[Math.round(Math.random() * (types.length - 1))];
@@ -340,7 +323,7 @@ $(function() {
     var optionFour = {
         charttype: '轮廓展示图',
         tooltip: {
-            formatter: function(params) {
+            formatter: function (params) {
                 return params.marker + params.name + ': ' + params.value[3] + ' ms';
             }
         },
@@ -387,16 +370,17 @@ $(function() {
             containLabel: true
         },
         xAxis: {
-            min: startTime,
+            // min: startTime,
             scale: true,
-            axisLabel: {
-                formatter: function(val) {
-                    return Math.max(0, val - startTime) + ' ms';
-                }
-            }
+            // axisLabel: {
+            //     formatter: function (val) {
+            //         console.log(val, startTime);
+            //         return Math.max(0, val - startTime) + ' ms';
+            //     }
+            // }
         },
         yAxis: {
-            data: categories
+            data: ['目录A', '目录B', '目录C']
         },
         series: [{
             type: 'custom',
@@ -413,21 +397,34 @@ $(function() {
             data: data
         }]
     };
+    // console.log('data:', JSON.stringify(data),optionFour);
 
+    
     chartOne.setOption(optionOne);
     chartTwo.setOption(optionTwo);
     chartThree.setOption(optionThree);
     chartFour.setOption(optionFour);
-    $(window).resize(function() {
-        chartOne.resize();
-        chartTwo.resize();
-        chartThree.resize();
-        chartFour.resize();
-    });
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "http://172.16.1.232:8088/echarts/get/-1/0",
+    //     data: {},
+    //     success: function (data) {
+    //         console.log(data.data[1].json);
+    //         var chartTwo = echarts.init(document.getElementById('charttwo'));
+    //         // chartTwo.setOption(data.data[0].json);
+    //     },
+    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+    //     }
+    // });
+
+
+
+    // $(window).resize(function () {
+    //     chartOne.resize();
+    //     // chartTwo.resize();
+    //     chartThree.resize();
+    //     chartFour.resize();
+    // });
 });
-
-
-
-
-
-

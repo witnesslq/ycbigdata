@@ -23,6 +23,7 @@ $(function() {
                 magicType: {
                     type: ['stack', 'tiled']
                 },
+                restore: {show: true},
                 dataView: {}
             }
         },
@@ -643,11 +644,11 @@ $(function() {
         tooltip: {},
         legend: {
             data: ['工作', '娱乐', '睡觉'], // 可能需要更改
-            bottom: 50,
-            right: '10%'
+            bottom: 25,
+            right: 'center'
         },
         calendar: {
-            top: 'middle',
+            top: 25,
             left: 'center',
             orient: 'vertical',
             cellSize: cellSize, //[50, 50]
@@ -658,7 +659,7 @@ $(function() {
                 }
             },
             dayLabel: {
-                margin: 20,
+                margin: 8,
                 firstDay: 1,
                 nameMap: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
             },
@@ -994,4 +995,5 @@ $(function() {
     $(window).resize(function() {
         chart7.resize();
     });
+    
 });

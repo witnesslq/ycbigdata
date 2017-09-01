@@ -42,6 +42,7 @@
     #prompt {
         position: absolute;
         left: 56px;
+        top: 370px;
         z-index: 999;
     }
     </style>
@@ -54,12 +55,12 @@
                 <button type="button" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <table id="table" data-toggle="table">
+                <table id="table">
                     <thead>
                         <tr>
-                            <th data-field="state" data-checkbox="true"></th>
-                            <th data-field="image" data-formatter="imageFormatter">缩列图</th>
-                            <th data-field="name">数据</th>
+                            <th data-field="state" data-checkbox="true" data-formatter="stateFormatter">是否首页显示</th>
+                            <th data-field="type" data-formatter="imageFormatter">缩列图</th>
+                            <th data-field="json" data-formatter="jsonFormatter">标题</th>
                             <th data-field="action" data-formatter="actionFormatter" data-row-style="rowStyle">操作</th>
                         </tr>
                     </thead>
@@ -117,10 +118,10 @@
                                             <input type="radio" class="radio-align" name="blankRadio" id="type9" value="type9">
                                             <image src="../assets/img/icon-type9.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type9.png'></image>"></image>
                                         </label>
-                                        <label class="label-position label-align">
+                                        <!-- <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type10" value="type10">
                                             <image src="../assets/img/icon-type10.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type10.png'></image>"></image>
-                                        </label>
+                                        </label> -->
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type11" value="type11">
                                             <image src="../assets/img/icon-type11.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type11.png'></image>"></image>
@@ -128,9 +129,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="title_group" class="form-group" style="display:none">
+                                <label for="title" class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title" placeholder="标题">
+                                    <div id="edittable"></div>
+                                </div>
+                            </div>
                             <div id="data" class="form-group" style="display:none">
-                                <button id="prompt" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="提示">提示</button>
-                                <label for="inputPassword3" class="col-sm-2 control-label">数据</label>
+                                <button id="prompt" type="button" class="btn btn-link" data-container="body" data-toggle="popover" data-placement="left" data-content="提示">(提示)</button>
+                                <label class="col-sm-2 control-label" style="position: absolute;top: 370px;">数据</label>
                                 <div class="col-sm-10">
                                     <div id="edittable"></div>
                                 </div>
@@ -144,9 +152,21 @@
                 </div>
             </div>
         </div>
-        <div id="prompt" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content"></div>
+        <div id="delete_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="config_modal_title">删除</h4>
+                    </div>
+                    <div class="modal-body">
+                        是否删除？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary no-radius" onclick="onDelClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     var chart1 = echarts.init(document.getElementById('chart1'));
     var option1 = {
         charttype: '柱状图',
@@ -140,7 +140,7 @@ $(function () {
         }]
     };
     chart1.setOption(option1);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart1.resize();
     });
 
@@ -194,7 +194,7 @@ $(function () {
     };
 
     chart2.setOption(option2);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart2.resize();
     });
 
@@ -257,7 +257,7 @@ $(function () {
     };
 
     chart3.setOption(option3);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart3.resize();
     });
 
@@ -373,7 +373,7 @@ $(function () {
             center: ['77%', '50%'],
             radius: '40%',
             min: 0,
-            max: 2,
+            max: 100,
             startAngle: 135,
             endAngle: 45,
             splitNumber: 2,
@@ -390,16 +390,16 @@ $(function () {
                 }
             },
             axisLabel: {
-                formatter: function (v) {
-                    switch (v + '') {
-                        case '0':
-                            return 'E';
-                        case '1':
-                            return 'Gas';
-                        case '2':
-                            return 'F';
-                    }
-                }
+                // formatter: function (v) {
+                //     switch (v + '') {
+                //         case '0':
+                //             return 'E';
+                //         case '1':
+                //             return 'Gas';
+                //         case '2':
+                //             return 'F';
+                //     }
+                // }
             },
             splitLine: {
                 length: 15,
@@ -439,16 +439,16 @@ $(function () {
                 show: false
             },
             axisLabel: {
-                formatter: function (v) {
-                    switch (v + '') {
-                        case '0':
-                            return 'H';
-                        case '1':
-                            return 'Water';
-                        case '2':
-                            return 'C';
-                    }
-                }
+                // formatter: function(v) {
+                //     switch (v + '') {
+                //         case '0':
+                //             return 'H';
+                //         case '1':
+                //             return 'Water';
+                //         case '2':
+                //             return 'C';
+                //     }
+                // }
             },
             splitLine: { // 分隔线
                 length: 15, // 属性length控制线长
@@ -473,7 +473,7 @@ $(function () {
     };
 
     chart4.setOption(option4);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart4.resize();
     });
     /**
@@ -482,7 +482,7 @@ $(function () {
     var chart5 = echarts.init(document.getElementById('chart5'));
 
 
-// 生成scatterData
+    // 生成scatterData
     // function getVirtulData() {
     //     var date = +echarts.number.parseDate('2017-02-01');
     //     var end = +echarts.number.parseDate('2017-03-01');
@@ -499,7 +499,7 @@ $(function () {
     // }
 
     var scatterData = [
-        ["2017-02-01", 21, 10, 8],//[日期，工作占比，娱乐占比，睡觉占比]
+        ["2017-02-01", 21, 10, 8], //[日期，工作占比，娱乐占比，睡觉占比]
         ["2017-02-02", 12, 6, 17],
         ["2017-02-03", 9, 5, 3],
         ["2017-02-04", 6, 7, 12],
@@ -575,7 +575,7 @@ $(function () {
     //     }]
     // }]
     function getPieSeries(scatterData, chart) {
-        var piedata = echarts.util.map(scatterData, function (item, index) {
+        var piedata = echarts.util.map(scatterData, function(item, index) {
             var center = chart.convertToPixel('calendar', item);
             return {
                 id: index + 'pie', // 每个饼图的id不一样
@@ -609,10 +609,10 @@ $(function () {
             label: {
                 normal: {
                     show: true,
-                    formatter: function (params) {
+                    formatter: function(params) {
                         return echarts.format.formatTime('dd', params.value[0]);
                     },
-                    offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5],//cellSize=[50, 50],如果固定的话就写死，单元格的宽高
+                    offset: [-50 / 2 + 8, -50 / 2 + 5], //cellSize=[50, 50],如果固定的话就写死，单元格的宽高
                     textStyle: {
                         color: '#000',
                         fontSize: 12
@@ -650,7 +650,7 @@ $(function () {
             top: 'middle',
             left: 'center',
             orient: 'vertical',
-            cellSize: cellSize,//[50, 50]
+            cellSize: cellSize, //[50, 50]
             yearLabel: {
                 show: false,
                 textStyle: {
@@ -671,14 +671,14 @@ $(function () {
     };
 
     if (!chart5.inNode) {
-        setTimeout(function () {
+        setTimeout(function() {
             chart5.setOption({
                 series: getPieSeries(scatterData, chart5)
             });
         }, 10);
     }
     chart5.setOption(option5);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart5.resize();
     });
 
@@ -816,7 +816,7 @@ $(function () {
     };
 
     chart6.setOption(option6);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart6.resize();
     });
 
@@ -991,7 +991,7 @@ $(function () {
         }]
     };
     chart7.setOption(option7);
-    $(window).resize(function () {
+    $(window).resize(function() {
         chart7.resize();
     });
 });

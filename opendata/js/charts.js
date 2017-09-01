@@ -3,11 +3,14 @@ $(function () {
     var chartTwo = echarts.init(document.getElementById('charttwo'));
     var chartThree = echarts.init(document.getElementById('chartthree'));
     var chartFour = echarts.init(document.getElementById('chartfour'));
+    var chartArr = [chartOne, chartTwo, chartThree];
+    var chartTitle = ['#chartonetitle', '#charttwotitle', '#chartthreetitle'];
     var cellSize = [50, 50];
+    var i = 0;
+    var flag = true;
     /** 
-     * 获取下一个月 
-     * 
-     * @date 格式为yyyy-mm-dd的日期，如：2014-01-25 
+     * 获取下一个月月份字符串 
+     * @param {String} date 格式为yyyy-mm-dd的日期，如：2014-01-25 
      */
     function getNextMonth(date) {
         var arr = date.split('-');
@@ -36,7 +39,7 @@ $(function () {
         return t2;
     }
     /**
-     * 
+     * 生成输入月份的所有天数日期
      * @param {String} start 起始日期 '2017-02-01'
      * @param {String} end  结束日期  '2017-03-01'
      */
@@ -54,8 +57,14 @@ $(function () {
         }
         return data;
     }
-
-    function getPieSeries(Data,scatter,dateArr, chart) {
+    /**
+     * 生成饼图的位置等配置信息
+     * @param {Object} Data  echarts的option数据
+     * @param {Array} scatter 饼图各占比的名字
+     * @param {Array} dateArr 日期数组
+     * @param {Object} chart chart对象
+     */
+    function getPieSeries(Data, scatter, dateArr, chart) {
         var piedata = echarts.util.map(Data.data, function (item, index) {
             var center = chart.convertToPixel('calendar', dateArr[index]);
             return {
@@ -74,10 +83,10 @@ $(function () {
                     name: scatter[0],
                     value: parseInt(item[0])
                 }, {
-                    name:  scatter[1],
+                    name: scatter[1],
                     value: parseInt(item[1])
                 }, {
-                    name:  scatter[2],
+                    name: scatter[2],
                     value: parseInt(item[2])
                 }]
             };
@@ -104,45 +113,69 @@ $(function () {
         });
         return piedata
     }
-
-    function dateBar(option){
-        $('#charttwotitle').text(option.charttype)
-        var date= option.date+'-01';
-        var dateArr=getVirtulData(date, getNextMonth(date));
-        chartTwo.setOption(option);
-        if (!chartTwo.inNode) {
+    /**
+     * 给日历饼图添加数据
+     * @param {Object} option 日历饼图的option数据
+     */
+    function dateBar(option, chart) {
+        var date = option.date + '-01';
+        var dateArr = getVirtulData(date, getNextMonth(date));
+        chart.setOption(option);
+        if (!chart.inNode) {
             setTimeout(function () {
-                chartTwo.setOption({
-                    series: getPieSeries(option,option.legend.data,dateArr,chartTwo)
+                chart.setOption({
+                    series: getPieSeries(option, option.legend.data, dateArr, chart)
                 });
             }, 10);
         }
     }
-    
+
     $.ajax({
         type: "GET",
         url: "http://172.16.1.232:8088/echarts/get/-1/0",
         data: {},
         success: function (data) {
-            dateBar(data.data[3].json);
-            // var date= data.data[3].json.date+'-01';
-            // var dateArr=getVirtulData(date, getNextMonth(date));
-            // chartTwo.setOption(data.data[3].json);
-            // if (!chartTwo.inNode) {
-            //     setTimeout(function () {
-            //         chartTwo.setOption({
-            //             series: getPieSeries(data.data[3].json,data.data[3].json.legend.data,dateArr,chartTwo)
-            //         });
-            //     }, 10);
-            // }
-            // var series=getPieSeries(data.data[3].json,data.data[3].json.legend.data,chartTwo);
-            // data.data[3].json.series=series;
-            // console.log(data.data[3].json);
+            if (data.code != 200) {
+                console.log(data.msg);
+                return;
+            }
+            var source = data.data;
+            for (var index in source) {
+                 // 如果后端返回的图表数量超过四个，只显示前四个
+                 if (index > 3) {
+                    break;
+                }
+                // type2,3,5,6,7,8只能是小的echarts图表，只有1,4,9,10,11才能为大的图表
+                if (source[index].type === 'type1' || source[index].type === 'type4' || source[index].type === 'type9' || source[index].type === 'type10' || source[index].type === 'type11') {
+                    if (flag) {
+                        $('#chartfourtitle').text(source[index].json.charttype);
+                        chartFour.setOption(source[index].json);
+                        flag = false;
+                    } else {
+                        // 将大图放到小图位置
+                        if (source[index].type === 'type8') {
+                            $(chartTitle[i]).text(source[index].json.charttype);
+                            dateBar(source[index].json, chartArr[i]);
+                        } else {
+                            $(chartTitle[i]).text(source[index].json.charttype);
+                            chartArr[i].setOption(source[index].json)
+                        }
+                        i++;
+                    }
 
-            
-            chartOne.setOption(data.data[0].json);
-            //  chartThree.setOption(optionThree);
-            //  chartFour.setOption(optionFour);
+                } else {
+                    // 小的echarts图标中，type=type8的比较特殊
+                    if (source[index].type === 'type8') {
+                        $(chartTitle[i]).text(source[index].json.charttype);
+                        dateBar(source[index].json, chartArr[i]);
+                    } else {
+                        $(chartTitle[i]).text(source[index].json.charttype);
+                        
+                        chartArr[i].setOption(source[index].json)
+                    }
+                    i++;
+                }
+            }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
 

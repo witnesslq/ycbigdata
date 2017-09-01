@@ -13,6 +13,7 @@
                 tableClass: 'inputtable',
                 jsonData: false,
                 headerCols: false,
+                rows: 0,
                 maxRows: 99,
                 maxColumn: 99,
                 first_row: true,
@@ -30,7 +31,7 @@
             }),
             defaultth = '<th><a class="addcol icon-button" href="#">+</a> <a class="delcol icon-button" href="#">-</a></th>',
             colnumber,
-            rownumber,
+            rownumber = s.rows,
             reset,
             is_validated = true;
 
@@ -82,6 +83,10 @@
                 $table.find('.delcol').addClass('disabled');
             }
             if (rownumber < 2) {
+                $table.find('.delrow').addClass('disabled');
+            }
+            if (s.rows && rownumber === s.rows) {
+                $table.find('.addrow').addClass('disabled');
                 $table.find('.delrow').addClass('disabled');
             }
             if (s.maxRows && rownumber === s.maxRows) {

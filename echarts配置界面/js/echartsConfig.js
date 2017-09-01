@@ -6,6 +6,10 @@
     });
 })(jQuery);
 
+var mytable = null;
+var delIndex = null;
+var url = 'http://172.16.1.232:8088';
+
 function initTable() {
     $('#table').bootstrapTable('destroy');
     $.ajax({
@@ -32,9 +36,6 @@ function initTable() {
         }
     });
 }
-
-var mytable = null;
-var delIndex = null;
 
 $(':input[name="blankRadio"]').on('click', function() {
 
@@ -138,7 +139,7 @@ $('#table').on('check.bs.table', function($ele, row, index) {
             request.setRequestHeader("Accept", "application/json;");
             request.setRequestHeader("Content-Type", "application/json;");
         },
-        url: "http://172.16.1.232:8088/echarts/select/update",
+        url: url + '/echarts/select/update',
         data: JSON.stringify(nData),
         success: function(res) {
 
@@ -151,13 +152,13 @@ $('#table').on('uncheck.bs.table', function($ele, row) {
     var nData = $.extend(true, {}, row);
     nData.select = -1;
     $.ajax({
-        type: "PUT",
+        type: 'PUT',
         // contentType: "application/json; charset=utf-8",
         beforeSend: function(request) {
-            request.setRequestHeader("Accept", "application/json;");
-            request.setRequestHeader("Content-Type", "application/json;");
+            request.setRequestHeader('Accept', 'application/json;');
+            request.setRequestHeader('Content-Type', 'application/json;');
         },
-        url: "http://172.16.1.232:8088/echarts/select/update",
+        url: url + '/echarts/select/update',
         data: JSON.stringify(nData),
         success: function(res) {
 

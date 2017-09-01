@@ -132,7 +132,7 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "http://172.16.1.232:8088/echarts/get/-1/0",
+        url: "http://172.16.1.232:8088/echarts/get/1/0",
         data: {},
         success: function (data) {
             if (data.code != 200) {

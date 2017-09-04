@@ -227,7 +227,7 @@ function onDelClick() {
     var id = delRow.id;
     $.ajax({
         type: "DELETE",
-        url: "http://172.16.1.232:8088/echarts/delete/" + id,
+        url: url + "/echarts/delete/" + id,
         success: function(res) {
             $('#delete_modal').modal('hide');
             initTable();
@@ -1283,7 +1283,7 @@ function onSaveClick() {
             request.setRequestHeader("Accept", "application/json;");
             request.setRequestHeader("Content-Type", "application/json;");
         },
-        url: "http://172.16.1.232:8088/echarts/save",
+        url: url + "/echarts/save",
         data: JSON.stringify(obj),
         success: function(res) {
             var message = res.msg;

@@ -43,7 +43,12 @@ $(':input[name="blankRadio"]').on('click', function() {
     onRadioClick($(this).val(), []);
 });
 
+
 function onRadioClick(selected, data1) {
+    // $('#prompt').popover('hide');
+    $("#prompt").popover({
+        html: true
+    });
     // 根据选中的值 更换不同图片提示
     $('#prompt').attr('data-content', '<div class="prompt-content">' +
         '<div class="prompt-left">' +
@@ -55,6 +60,7 @@ function onRadioClick(selected, data1) {
         '<image src="./assets/img/' + selected + '.png" style="max-width: 500px;"></image>' +
         '</div>' +
         '</div>');
+    // $('#prompt').popover('show');
     if (mytable) {
         $('#edittable').html(' ');
     }
@@ -235,6 +241,7 @@ $('#config_modal').on('hidden.bs.modal', function(e) {
     $('#edittable').html(' ');
     $('#data').hide();
     $('#title_group').hide();
+    $('#prompt').popover('destroy');
 });
 
 function deleteClick(index) {

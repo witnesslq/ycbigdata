@@ -47,6 +47,20 @@
         top: 370px;
         z-index: 999;
     }
+
+    .config-submit {
+        background: #108EE9;
+        border-color: #108EE9;
+    }
+
+    .config-submit:hover {
+        background: #108EE9;
+        border-color: #108EE9;
+    }
+
+    .config-close {
+        background: #fff;
+    }
     </style>
 </head>
 
@@ -54,7 +68,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 margin">
-                <button id="add" type="button" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
+                <button id="add" type="button" style="background: #5cb85c;border-color: #5cb85c;" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <table id="table">
@@ -148,8 +162,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary no-radius" onclick="onSaveClick()">确定</button>
-                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary no-radius config-submit" onclick="onSaveClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius config-close" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
@@ -165,8 +179,8 @@
                         是否删除？
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary no-radius" onclick="onDelClick()">确定</button>
-                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary no-radius config-submit" onclick="onDelClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius config-close" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>

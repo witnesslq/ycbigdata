@@ -5,14 +5,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>echarts配置</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap-table.css">
-    <link rel="stylesheet" href="../assets/css/jquery.edittable.min.css">
-    <script src="../assets/js/jquery-latest.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/bootstrap-table.js"></script>
-    <script src="../assets/js/jquery.edittable.js"></script>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap-table.css">
+    <link rel="stylesheet" href="./assets/css/jquery.edittable.min.css">
+    <link rel="stylesheet" href="./assets/css/toastr.css">
+    <script src="./assets/js/jquery-latest.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/bootstrap-table.js"></script>
+    <script src="./assets/js/jquery.edittable.js"></script>
+    <script src="./assets/js/toastr.js"></script>
+    <script src="./assets/js/json2.js"></script>
     <style type="text/css">
     .no-radius {
         border-radius: 0;
@@ -45,6 +48,20 @@
         top: 370px;
         z-index: 999;
     }
+
+    .config-submit {
+        background: #108EE9;
+        border-color: #108EE9;
+    }
+
+    .config-submit:hover {
+        background: #108EE9;
+        border-color: #108EE9;
+    }
+
+    .config-close {
+        background: #fff;
+    }
     </style>
 </head>
 
@@ -52,7 +69,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 margin">
-                <button type="button" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
+                <button id="add" type="button" style="background: #5cb85c;border-color: #5cb85c;" class="btn btn-success no-radius" onclick="onConfigClick()">添加配置</button>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <table id="table">
@@ -69,7 +86,7 @@
                 </table>
             </div>
         </div>
-        <div id="config_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div id="config_modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -84,47 +101,47 @@
                                     <div id="radios" class="radio">
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type1" value="type1" />
-                                            <image src="../assets/img/icon-type1.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type1.png'></image>"></image>
+                                            <image src="./assets/img/icon-type1.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type1.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type2" value="type2">
-                                            <image src="../assets/img/icon-type2.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type2.png'></image>"></image>
+                                            <image src="./assets/img/icon-type2.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type2.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type3" value="type3">
-                                            <image src="../assets/img/icon-type3.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type3.png'></image>"></image>
+                                            <image src="./assets/img/icon-type3.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type3.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type4" value="type4">
-                                            <image src="../assets/img/icon-type4.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type4.png'></image>"></image>
+                                            <image src="./assets/img/icon-type4.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type4.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type5" value="type5">
-                                            <image src="../assets/img/icon-type5.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type5.png'></image>"></image>
+                                            <image src="./assets/img/icon-type5.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type5.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type6" value="type6">
-                                            <image src="../assets/img/icon-type6.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type6.png'></image>"></image>
+                                            <image src="./assets/img/icon-type6.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type6.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type7" value="type7">
-                                            <image src="../assets/img/icon-type7.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type7.png'></image>"></image>
+                                            <image src="./assets/img/icon-type7.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type7.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type8" value="type8">
-                                            <image src="../assets/img/icon-type8.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type8.png'></image>"></image>
+                                            <image src="./assets/img/icon-type8.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type8.png'></image>"></image>
                                         </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type9" value="type9">
-                                            <image src="../assets/img/icon-type9.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type9.png'></image>"></image>
+                                            <image src="./assets/img/icon-type9.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type9.png'></image>"></image>
                                         </label>
-                                        <!-- <label class="label-position label-align">
+                                        <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type10" value="type10">
-                                            <image src="../assets/img/icon-type10.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type10.png'></image>"></image>
-                                        </label> -->
+                                            <image src="./assets/img/icon-type10.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type10.png'></image>"></image>
+                                        </label>
                                         <label class="label-position label-align">
                                             <input type="radio" class="radio-align" name="blankRadio" id="type11" value="type11">
-                                            <image src="../assets/img/icon-type11.png" data-toggle="tooltip" data-placement="left" title="<image src='../assets/img/type11.png'></image>"></image>
+                                            <image src="./assets/img/icon-type11.png" data-toggle="tooltip" data-placement="left" title="<image src='./assets/img/type11.png'></image>"></image>
                                         </label>
                                     </div>
                                 </div>
@@ -146,13 +163,13 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary no-radius" onclick="onSaveClick()">确定</button>
-                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary no-radius config-submit" onclick="onSaveClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius config-close" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="delete_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div id="delete_modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -163,14 +180,14 @@
                         是否删除？
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary no-radius" onclick="onDelClick()">确定</button>
-                        <button type="button" class="btn btn-default no-radius" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary no-radius config-submit" onclick="onDelClick()">确定</button>
+                        <button type="button" class="btn btn-default no-radius config-close" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script src="./echartsConfig.js"></script>
+<script src="./js/echartsConfig.js"></script>
 
 </html>

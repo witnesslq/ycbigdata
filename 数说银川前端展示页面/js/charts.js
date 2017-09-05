@@ -148,8 +148,21 @@ $(function() {
                 // type2,3,5,6,7,8只能是小的echarts图表，只有1,4,9,10,11才能为大的图表
                 if (source[index].type === 'type1' || source[index].type === 'type4' || source[index].type === 'type9' || source[index].type === 'type10' || source[index].type === 'type11') {
                     if (flag) {
-                        $('#chartfourtitle').text(source[index].json.charttype);
-                        chartFour.setOption(source[index].json);
+                        if (source[index].type === 'type10') {
+                            var option = source[index].json;
+                            $('#chartfourtitle').text(source[index].json.charttype);
+                            var opt = JSON.stringify(option);
+                            opt = JSON.parse(opt, function(k, v) {
+                                if (v.indexOf && v.indexOf('function') > -1) {
+                                    return eval("(function(){return " + v + " })()")
+                                }
+                                return v;
+                            });
+                            chartFour.setOption(opt);
+                        } else {
+                            $('#chartfourtitle').text(source[index].json.charttype);
+                            chartFour.setOption(source[index].json);
+                        }
                         flag = false;
                     } else {
                         // 将大图放到小图位置

@@ -6,6 +6,12 @@
     });
 })(jQuery);
 
+var mytable = null;
+var delIndex = null;
+var url = 'http://172.16.1.232:8088';
+
+var id = null;
+
 function initTable() {
     $('#table').bootstrapTable('destroy');
     $.ajax({
@@ -33,22 +39,28 @@ function initTable() {
     });
 }
 
-var mytable = null;
-var delIndex = null;
-
 $(':input[name="blankRadio"]').on('click', function() {
+    onRadioClick($(this).val(), []);
+});
 
+
+function onRadioClick(selected, data1) {
+    // $('#prompt').popover('hide');
+    $("#prompt").popover({
+        html: true
+    });
     // 根据选中的值 更换不同图片提示
     $('#prompt').attr('data-content', '<div class="prompt-content">' +
         '<div class="prompt-left">' +
         '<div class="prompt-title">填写规范</div>' +
-        '<image src="../assets/img/sample-' + $(this).val() + '.png" width="500px"></image>' +
+        '<image src="./assets/img/sample-' + selected + '.png" width="500px"></image>' +
         '</div>' +
         '<div class="prompt-right">' +
         '<div class="prompt-title">效果展示</div>' +
-        '<image src="../assets/img/' + $(this).val() + '.png" style="max-width: 500px;"></image>' +
+        '<image src="./assets/img/' + selected + '.png" style="max-width: 500px;"></image>' +
         '</div>' +
         '</div>');
+    // $('#prompt').popover('show');
     if (mytable) {
         $('#edittable').html(' ');
     }
@@ -57,7 +69,6 @@ $(':input[name="blankRadio"]').on('click', function() {
     var maxRows = 20;
     var maxColumns = 20;
     var headerCols = false;
-    var selected = $(this).val();
     var data = [
         ['']
     ];
@@ -102,6 +113,9 @@ $(':input[name="blankRadio"]').on('click', function() {
             data.push(['']);
         }
     }
+    if (data1.length) {
+        data = data1;
+    }
 
     mytable = $('#edittable').editTable({
         data: data,
@@ -113,21 +127,31 @@ $(':input[name="blankRadio"]').on('click', function() {
     });
     $('#data').show();
     $('#title_group').show();
-});
+    $('#title').val('');
+}
 
-$('#table').on('check.bs.table', function($ele, row, index) {
+$('#table').on('check.bs.table', function($ele, row, $this) {
+    console.log($ele);
     var selecteds = $('#table').bootstrapTable('getSelections');
+    var data = $('#table').bootstrapTable('getData');
     if (selecteds.length > 4) {
-        var data = $('#table').bootstrapTable('getData');
+        $($this).removeAttr("checked");
+        toastr.warning('只能选择四条数据！！！');
+        return;
+    } else {
+        var num = 0;
         var index = 0;
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].id === row.id) {
+        for (var i = 0; i < selecteds.length; i++) {
+            if (selecteds[i].type === 'type10' || selecteds[i].type === 'type11') {
                 index = i;
+                num++;
             }
         }
-        alert('只能选择四条数据！！！');
-        $('#table').bootstrapTable('uncheck', index);
-        return false;
+        if (num > 1) {
+            toastr.warning('自定义系列 和  主题河流图 只能选择一个');
+            $($this).removeAttr("checked");
+            return;
+        }
     }
     var nData = $.extend(true, {}, row);
     nData.select = 1;
@@ -138,10 +162,11 @@ $('#table').on('check.bs.table', function($ele, row, index) {
             request.setRequestHeader("Accept", "application/json;");
             request.setRequestHeader("Content-Type", "application/json;");
         },
-        url: "http://172.16.1.232:8088/echarts/select/update",
+        url: url + '/echarts/select/update',
         data: JSON.stringify(nData),
         success: function(res) {
-
+            var msg = res.msg;
+            toastr.success(msg);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {}
     });
@@ -151,16 +176,17 @@ $('#table').on('uncheck.bs.table', function($ele, row) {
     var nData = $.extend(true, {}, row);
     nData.select = -1;
     $.ajax({
-        type: "PUT",
+        type: 'PUT',
         // contentType: "application/json; charset=utf-8",
         beforeSend: function(request) {
-            request.setRequestHeader("Accept", "application/json;");
-            request.setRequestHeader("Content-Type", "application/json;");
+            request.setRequestHeader('Accept', 'application/json;');
+            request.setRequestHeader('Content-Type', 'application/json;');
         },
-        url: "http://172.16.1.232:8088/echarts/select/update",
+        url: url + '/echarts/select/update',
         data: JSON.stringify(nData),
         success: function(res) {
-
+            var msg = res.msg;
+            toastr.success(msg);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {}
     });
@@ -179,16 +205,16 @@ function imageFormatter(value, row, index) {
     if (!row.type) {
         row.type = 'type1';
     }
-    return '<image src="../assets/img/icon-' + row.type + '.png" data-toggle="tooltip" data-placement="right" title="<image src=\'../assets/img/' + row.type + '.png\'></image>" width="30px"></image>';
+    return '<image src="./assets/img/icon-' + row.type + '.png" data-toggle="tooltip" data-placement="right" title="<image src=\'./assets/img/' + row.type + '.png\'></image>" width="30px"></image>';
 }
 
 function jsonFormatter(value, row, index) {
-    return row.json.title.text;
+    return row.json.title.text || ' ';
 }
 
 function actionFormatter(value, row, index) {
-    // var btns = '<button class="btn btn-link" onclick="onConfigClick(' + index + ')">编辑</button>' +
-    var btns = '<button class="btn btn-link" onclick="deleteClick(' + index + ')">删除</button>';
+    var btns = '<button class="btn btn-link" onclick="onConfigClick(' + index + ')">编辑</button>' +
+        '<button class="btn btn-link" onclick="deleteClick(' + index + ')">删除</button>';
     return btns;
 }
 
@@ -200,6 +226,12 @@ function onConfigClick(index) {
     var type = 'add';
     if (typeof index !== 'undefined') {
         type = 'edit';
+        var data = $('#table').bootstrapTable('getData');
+        var obj = data[index];
+        $(':input[name="blankRadio"][value="' + obj.type + '"]').prop('checked', 'checked');
+        onRadioClick(obj.type, obj.data);
+        $('#title').val(obj.json.title.text);
+        id = obj.id;
     }
     $('#config_modal_title').text(type === 'add' ? '添加' : '编辑');
     $('#config_modal').modal({
@@ -214,6 +246,7 @@ $('#config_modal').on('hidden.bs.modal', function(e) {
     $('#edittable').html(' ');
     $('#data').hide();
     $('#title_group').hide();
+    $('#prompt').popover('destroy');
 });
 
 function deleteClick(index) {
@@ -226,8 +259,10 @@ function onDelClick() {
     var id = delRow.id;
     $.ajax({
         type: "DELETE",
-        url: "http://172.16.1.232:8088/echarts/delete/" + id,
+        url: url + "/echarts/delete/" + id,
         success: function(res) {
+            var msg = res.msg;
+            toastr.success(msg);
             $('#delete_modal').modal('hide');
             initTable();
         },
@@ -1141,6 +1176,139 @@ function getType9Option() {
     return option;
 }
 
+function getType10Option() {
+    var data = mytable.getData();
+    var x0 = [];
+    for (var c = 0; c < data[0].length; c++) {
+        if (!data[0][c]) {
+            continue;
+        }
+        x0.push(data[0][c]);
+    }
+    var y = [];
+    for (var i = 1; i < data.length; i++) {
+        if (!data[i][0]) {
+            continue;
+        }
+        y.push(data[i][0]);
+    }
+    var arr = [];
+    var colors = ['#7b9ce1', '#bd6d6c', '#75d874', '#e0bc78', '#dc77dc', '#72b362'];
+    for (var j = 1; j < data.length; j++) {
+        var index = Math.floor((j - 1) / x0.length);
+        var index1 = Math.ceil((j - 1) % x0.length);
+        var obj = {
+            name: x0[index1],
+            value: [],
+            itemStyle: {
+                normal: {
+                    color: colors[index1]
+                }
+            }
+        };
+        var start = data[j][1];
+        var end = data[j][2];
+        var duration = end - start;
+        obj.value.push(index);
+        obj.value.push(start);
+        obj.value.push(end);
+        obj.value.push(duration);
+        arr.push(obj);
+    }
+    arr.sort(radomSort);
+    var option = {
+        tooltip: {
+            formatter: function(params) {
+                return params.marker + params.name + ': ' + params.value[3];
+            }
+        },
+        charttype: '自定义系列',
+        title: {
+            text: $('#title').val(),
+            bottom: 0,
+            left: 'center',
+            textStyle: {
+                fontSize: 14,
+                color: '#999',
+                fontFamily: 'Microsoft YaHei',
+                fontWeight: 'normal'
+            }
+        },
+        legend: {
+            data: []
+        },
+        dataZoom: [{
+            type: 'slider',
+            filterMode: 'weakFilter',
+            showDataShadow: false,
+            top: 400,
+            height: 10,
+            borderColor: 'transparent',
+            backgroundColor: '#e2e2e2',
+            handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+            handleSize: 20,
+            handleStyle: {
+                shadowBlur: 6,
+                shadowOffsetX: 1,
+                shadowOffsetY: 2,
+                shadowColor: '#aaa'
+            },
+            labelFormatter: ''
+        }, {
+            type: 'inside',
+            filterMode: 'weakFilter'
+        }],
+        grid: {
+            height: 300
+        },
+        xAxis: {
+            scale: true,
+        },
+        yAxis: {
+            data: y
+        },
+        series: [{
+            type: 'custom',
+            renderItem: function(params, api) {
+                var categoryIndex = api.value(0);
+                var start = api.coord([api.value(1), categoryIndex]);
+                var end = api.coord([api.value(2), categoryIndex]);
+                var height = api.size([0, 1])[1] * 0.6;
+
+                return {
+                    type: 'rect',
+                    shape: echarts.graphic.clipRectByRect({
+                        x: start[0],
+                        y: start[1] - height / 2,
+                        width: end[0] - start[0],
+                        height: height
+                    }, {
+                        x: params.coordSys.x,
+                        y: params.coordSys.y,
+                        width: params.coordSys.width,
+                        height: params.coordSys.height
+                    }),
+                    style: api.style()
+                };
+            },
+            itemStyle: {
+                normal: {
+                    opacity: 0.8
+                }
+            },
+            encode: {
+                y: 0
+            },
+            data: arr
+        }]
+    };
+    return option;
+}
+
+function radomSort(a, b) {
+    return Math.random() > 0.5 ? -1 : 1;
+}
+
 function getType11Option() {
     var data = mytable.getData();
     var length = data.length;
@@ -1164,7 +1332,6 @@ function getType11Option() {
             arr.push([yAxis1[i], data[i][j], xAxis1[j]]);
         }
     }
-
     var option = {
         charttype: '主题河流图',
         title: {
@@ -1270,22 +1437,39 @@ function onSaveClick() {
             break;
     }
     var finalOpt = option;
+    var data = mytable.getData();
     var obj = {
         select: -1,
         type: type,
-        json: finalOpt
+        json: finalOpt,
+        data: data
     };
+    var finalUrl = url + '/echarts/save';
+    var ajaxType = 'POST';
+    if (id) {
+        obj.id = id;
+        finalUrl = url + '/echarts/json/update';
+        ajaxType = 'PUT';
+    }
+    var jsonString = JSON.stringify(obj, function(key, val) {
+        if (typeof val === 'function') {
+            return val + '';
+        }
+        return val;
+    });
+
     $.ajax({
-        type: "POST",
+        type: ajaxType,
         // contentType: "application/json; charset=utf-8",
         beforeSend: function(request) {
             request.setRequestHeader("Accept", "application/json;");
             request.setRequestHeader("Content-Type", "application/json;");
         },
-        url: "http://172.16.1.232:8088/echarts/save",
-        data: JSON.stringify(obj),
+        url: finalUrl,
+        data: jsonString,
         success: function(res) {
             var message = res.msg;
+            toastr.success(message);
             $('#config_modal').modal('hide');
             initTable();
         },

@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     var chartOne = echarts.init(document.getElementById('chartone'));
     var chartTwo = echarts.init(document.getElementById('charttwo'));
     var chartThree = echarts.init(document.getElementById('chartthree'));
@@ -65,7 +65,7 @@ $(function () {
      * @param {Object} chart chart对象
      */
     function getPieSeries(Data, scatter, dateArr, chart) {
-        var piedata = echarts.util.map(Data.data, function (item, index) {
+        var piedata = echarts.util.map(Data.data, function(item, index) {
             var center = chart.convertToPixel('calendar', dateArr[index]);
             return {
                 id: index + 'pie', // 每个饼图的id不一样
@@ -99,7 +99,7 @@ $(function () {
             label: {
                 normal: {
                     show: true,
-                    formatter: function (params) {
+                    formatter: function(params) {
                         return echarts.format.formatTime('dd', params.value[0]);
                     },
                     offset: [-cellSize[0] / 2 + 8, -cellSize[1] / 2 + 5], //cellSize=[50, 50],如果固定的话就写死，单元格的宽高
@@ -122,7 +122,7 @@ $(function () {
         var dateArr = getVirtulData(date, getNextMonth(date));
         chart.setOption(option);
         if (!chart.inNode) {
-            setTimeout(function () {
+            setTimeout(function() {
                 chart.setOption({
                     series: getPieSeries(option, option.legend.data, dateArr, chart)
                 });
@@ -134,22 +134,35 @@ $(function () {
         type: "GET",
         url: "http://172.16.1.232:8088/echarts/get/1/0",
         data: {},
-        success: function (data) {
+        success: function(data) {
             if (data.code != 200) {
                 console.log(data.msg);
                 return;
             }
             var source = data.data;
             for (var index in source) {
-                 // 如果后端返回的图表数量超过四个，只显示前四个
-                 if (index > 3) {
+                // 如果后端返回的图表数量超过四个，只显示前四个
+                if (index > 3) {
                     break;
                 }
                 // type2,3,5,6,7,8只能是小的echarts图表，只有1,4,9,10,11才能为大的图表
                 if (source[index].type === 'type1' || source[index].type === 'type4' || source[index].type === 'type9' || source[index].type === 'type10' || source[index].type === 'type11') {
                     if (flag) {
-                        $('#chartfourtitle').text(source[index].json.charttype);
-                        chartFour.setOption(source[index].json);
+                        if (source[index].type === 'type10') {
+                            var option = source[index].json;
+                            $('#chartfourtitle').text(source[index].json.charttype);
+                            var opt = JSON.stringify(option);
+                            opt = JSON.parse(opt, function(k, v) {
+                                if (v.indexOf && v.indexOf('function') > -1) {
+                                    return eval("(function(){return " + v + " })()")
+                                }
+                                return v;
+                            });
+                            chartFour.setOption(opt);
+                        } else {
+                            $('#chartfourtitle').text(source[index].json.charttype);
+                            chartFour.setOption(source[index].json);
+                        }
                         flag = false;
                     } else {
                         // 将大图放到小图位置
@@ -170,14 +183,14 @@ $(function () {
                         dateBar(source[index].json, chartArr[i]);
                     } else {
                         $(chartTitle[i]).text(source[index].json.charttype);
-                        
+
                         chartArr[i].setOption(source[index].json)
                     }
                     i++;
                 }
             }
         },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
 
         }
     });

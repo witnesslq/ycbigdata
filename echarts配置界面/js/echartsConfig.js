@@ -130,19 +130,28 @@ function onRadioClick(selected, data1) {
     $('#title').val('');
 }
 
-$('#table').on('check.bs.table', function($ele, row, index) {
+$('#table').on('check.bs.table', function($ele, row, $this) {
+    console.log($ele);
     var selecteds = $('#table').bootstrapTable('getSelections');
+    var data = $('#table').bootstrapTable('getData');
     if (selecteds.length > 4) {
-        var data = $('#table').bootstrapTable('getData');
+        $($this).removeAttr("checked");
+        toastr.warning('只能选择四条数据！！！');
+        return;
+    } else {
+        var num = 0;
         var index = 0;
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].id === row.id) {
+        for (var i = 0; i < selecteds.length; i++) {
+            if (selecteds[i].type === 'type10' || selecteds[i].type === 'type11') {
                 index = i;
+                num++;
             }
         }
-        toastr.warning('只能选择四条数据！！！');
-        $('#table').bootstrapTable('uncheck', index);
-        return;
+        if (num > 1) {
+            toastr.warning('自定义系列 和  主题河流图 只能选择一个');
+            $($this).removeAttr("checked");
+            return;
+        }
     }
     var nData = $.extend(true, {}, row);
     nData.select = 1;
@@ -164,10 +173,6 @@ $('#table').on('check.bs.table', function($ele, row, index) {
 });
 
 $('#table').on('uncheck.bs.table', function($ele, row) {
-    var selecteds = $('#table').bootstrapTable('getSelections');
-    if (selecteds.length === 4) {
-        return;
-    }
     var nData = $.extend(true, {}, row);
     nData.select = -1;
     $.ajax({
@@ -1212,6 +1217,11 @@ function getType10Option() {
     }
     arr.sort(radomSort);
     var option = {
+        tooltip: {
+            formatter: function(params) {
+                return params.marker + params.name + ': ' + params.value[3];
+            }
+        },
         charttype: '自定义系列',
         title: {
             text: $('#title').val(),
@@ -1255,11 +1265,32 @@ function getType10Option() {
             scale: true,
         },
         yAxis: {
-            data: categories
+            data: y
         },
         series: [{
             type: 'custom',
-            // renderItem: renderItem,
+            renderItem: function(params, api) {
+                var categoryIndex = api.value(0);
+                var start = api.coord([api.value(1), categoryIndex]);
+                var end = api.coord([api.value(2), categoryIndex]);
+                var height = api.size([0, 1])[1] * 0.6;
+
+                return {
+                    type: 'rect',
+                    shape: echarts.graphic.clipRectByRect({
+                        x: start[0],
+                        y: start[1] - height / 2,
+                        width: end[0] - start[0],
+                        height: height
+                    }, {
+                        x: params.coordSys.x,
+                        y: params.coordSys.y,
+                        width: params.coordSys.width,
+                        height: params.coordSys.height
+                    }),
+                    style: api.style()
+                };
+            },
             itemStyle: {
                 normal: {
                     opacity: 0.8
@@ -1420,6 +1451,13 @@ function onSaveClick() {
         finalUrl = url + '/echarts/json/update';
         ajaxType = 'PUT';
     }
+    var jsonString = JSON.stringify(obj, function(key, val) {
+        if (typeof val === 'function') {
+            return val + '';
+        }
+        return val;
+    });
+
     $.ajax({
         type: ajaxType,
         // contentType: "application/json; charset=utf-8",
@@ -1428,7 +1466,7 @@ function onSaveClick() {
             request.setRequestHeader("Content-Type", "application/json;");
         },
         url: finalUrl,
-        data: JSON.stringify(obj),
+        data: jsonString,
         success: function(res) {
             var message = res.msg;
             toastr.success(message);

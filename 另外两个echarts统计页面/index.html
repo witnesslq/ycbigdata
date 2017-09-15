@@ -19,17 +19,17 @@
                 <div class="row clearfix">
                     <div class="col fl"> 
                        A.使用途径：
-                                <input tabindex="7" type="radio" id="radio-1" groupindex="1" name="useWay" value='' checked>
+                                <input tabindex="7" type="radio" id="radio-1" groupindex="1" name="useWay" value="1" checked/>
                                 <label for="radio-1">开放</label> 
-                                <input tabindex="7" type="radio" id="radio-2" groupindex="1" name="useWay" value=''> 
+                                <input tabindex="7" type="radio" id="radio-2" groupindex="1" name="useWay" value="2"/> 
                                 <label for="radio-2">共享</label>
                         
                     </div>
                     <div class="col fl">
                             B.使用方式：
-                                    <input tabindex="7" type="radio" id="radio-3" groupindex="2" name="howUse" checked>
+                                    <input tabindex="7" type="radio" id="radio-3" groupindex="2" name="howUse" value="1" checked/>
                                     <label for="radio-3">浏览量</label> 
-                                    <input tabindex="7" type="radio" id="radio-4" groupindex="2" name="howUse"> 
+                                    <input tabindex="7" type="radio" id="radio-4" groupindex="2" name="howUse" value="2"/> 
                                     <label for="radio-4">下载量</label>
                             
                         </div>
@@ -37,9 +37,9 @@
                 <div class="row clearfix">
                     <div class="col fl">
                             C.数据类别：
-                                    <input tabindex="7" type="radio" id="radio-5" groupindex="3" name="dataType" checked>
+                                    <input tabindex="7" type="radio" id="radio-5" groupindex="3" name="dataType" value="1" checked/>
                                     <label for="radio-5">文件</label> 
-                                    <input tabindex="7" type="radio" id="radio-6" groupindex="3" name="dataType"> 
+                                    <input tabindex="7" type="radio" id="radio-6" groupindex="3" name="dataType" value="2"/> 
                                     <label for="radio-6">接口</label>
                            
                     </div>
@@ -49,49 +49,28 @@
                 <div class="row clearfix">
                     <div class="col fl"> 
                             D.邻域分类：
-                            <input tabindex="7" type="radio"  groupindex="4" name="commonredio" value="0" checked>
-                                <select id="select1" title="Basic example" multiple="multiple" name="example-basic" size="5">
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                        <option value="option4">Option 4</option>
-                                        <option value="option5">Option 5</option>
-                                        <option value="option6">Option 6</option>
-                                        <option value="option7">Option 7</option>
-                                        <option value="option8">Option 8</option>
-                                        <option value="option9">Option 9</option>
-                                        <option value="option10">Option 10</option>
-                                        <option value="option11">Option 11</option>
-                                        <option value="option12">Option 12</option>
+                           <label> 
+                            <input tabindex="7" type="radio"  groupindex="4" name="commonredio" value="0" checked/>
+                                <select id="select1" title="Basic example" multiple="multiple" name="example-basic" size="5"> 
                                 </select>
+                            </label>
                     </div>
                     <div class="col fl"> 
                             D.政府部门：
-                            <input tabindex="7" type="radio" groupindex="4" name="commonredio" value="1">
-                            <select id="select2" title="Basic example" multiple="multiple" name="example-basic" size="5">
-                                    <option value="option1">选项一</option>
-                                    <option value="option2">选项二</option>
-                                    <option value="option3">选项三</option>
-                                    <option value="option4">选项四</option>
-                                    <option value="option5">选项五</option>
-                                    <option value="option6">选项六</option>
-                                    <option value="option7">Option 7</option>
-                                    <option value="option8">Option 8</option>
-                                    <option value="option9">Option 9</option>
-                                    <option value="option10">Option 10</option>
-                                    <option value="option11">Option 11</option>
-                                    <option value="option12">Option 12</option>
+                            <label><input tabindex="7" type="radio" groupindex="4" name="commonredio" value="1"/>
+                            <select id="select2" title="Basic example" multiple="multiple" name="example-basic" size="5">   
                             </select>
+                            </label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="radioGroup">
-                <input tabindex="7" id="radio-7" type="radio" groupindex="5" name="date" value='' checked>
+                <input tabindex="7" id="radio-7" type="radio" groupindex="5" name="date" value="1" checked/>
                 <label for="radio-7">近一周</label> 
-                <input tabindex="7" id="radio-8" type="radio" groupindex="5" name="date" value=''>
+                <input tabindex="7" id="radio-8" type="radio" groupindex="5" name="date" value="2"/>
                 <label for="radio-8">近一月 </label>
-               <input tabindex="7" id="radio-9" type="radio" groupindex="5" name="date" value=''> 
+               <input tabindex="7" id="radio-9" type="radio" groupindex="5" name="date" value="3"/> 
                <label for="radio-9">近一年 </label>
         </div>
         <div class="echarts" id="chart"></div>

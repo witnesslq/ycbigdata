@@ -1,24 +1,30 @@
-$(function () {
+$(function() {
+    var URL = 'http://a.yinchuanopendata.com/index.php';
+    var config = {
+        timetype: '1',
+        is_open_share: '1', // 使用途径1.开发2.共享
+        sjtype: '1' // 1.目录2.接口
+    };
     /**
      * 给radio绑定事件
      */
-    $("input[type='radio']").on('ifChecked', function (event) {
+    $("input[type='radio']").on('ifChecked', function(event) {
         //ifCreated 事件应该在插件初始化之前绑定 
         switch (event.target.getAttribute('groupindex')) {
             case '1':
                 console.log('使用途径触发事件');
+                config.is_open_share = event.target.value;
+                drawchart(config);
                 break;
             case '2':
-                console.log('使用方式触发事件');
+                console.log('数据类别触发事件');
+                config.sjtype = event.target.value;
+                drawchart(config);
                 break;
             case '3':
-                console.log('数据类别触发事件');
-                break;
-            case '4':
-                toggleDisable(event.target.value);
-                break;
-            case '5':
-                console.log('时间查看触发事件');
+                console.log('日期触发事件');
+                config.timetype = event.target.value;
+                drawchart(config);
                 break;
             default:
                 break;
@@ -33,7 +39,7 @@ $(function () {
         increaseArea: '20%' // optional
     });
     var chartOne = echarts.init(document.getElementById('chart'));
-    var option = {
+    var chartOption = {
         title: {
             text: '数据集下载量/访问量 TOP10',
             bottom: 6,
@@ -50,13 +56,13 @@ $(function () {
             feature: {
                 dataView: {
                     show: true,
-                    readOnly:true,
-                    optionToContent:function(opt){
+                    readOnly: true,
+                    optionToContent: function(opt) {
                         var axisData = opt.yAxis[0].data; //坐标数据
                         var series = opt.series; //折线图数据
                         var tdHeads = '<td  style="padding: 0 10px"></td>'; //表头
                         var tdBodys = ''; //数据
-                        series.forEach(function (item) {
+                        series.forEach(function(item) {
                             //组装表头
                             tdHeads += `<td style="padding: 0 10px">${item.name}</td>`;
                         });
@@ -86,7 +92,7 @@ $(function () {
             containLabel: true
         },
         legend: {
-            data: ['下载量', '访问量']
+            data: []
         },
         xAxis: {
             type: 'value',
@@ -97,29 +103,35 @@ $(function () {
         },
         yAxis: {
             type: 'category',
-            data: ['数据集01', '数据集02', '数据集03', '数据集04', '数据集05', '数据集06']
+            data: []
         },
-        series: [{
-                name: '下载量',
-                type: 'bar',
-                data: [18203, 23489, 29034, 104970, 131744, 630230]
-            },
-            {
-                name: '访问量',
-                type: 'bar',
-                data: [19325, 23438, 31000, 121594, 134141, 681807]
-            }
-        ]
+        series: []
     };
 
-    chartOne.setOption(option);
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://172.16.1.232:8088/echarts/get/1/0",
-    //     data: {},
-    //     success: function (data) {},
-    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //     }
-    // });
+    drawchart(config);
 
+    function drawchart(config) {
+        chartOne.showLoading({
+            text: '数据获取中',
+            effect: 'whirling'
+        });
+        $.ajax({
+            type: "POST",
+            url: URL + "/ShareApi/selxx",
+            data: config,
+            success: function(data) {
+                var echartData = JSON.parse(data);
+                chartOption.legend.data = echartData.lastxx.legend;
+                chartOption.yAxis.data = echartData.lastxx.y;
+                var series = echartData.lastxx.series;
+                $.map(series, function(item) {
+                    item.type = 'bar';
+                });
+                chartOption.series = series;
+                chartOne.hideLoading();
+                chartOne.setOption(chartOption);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {}
+        });
+    }
 });

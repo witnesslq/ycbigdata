@@ -94,8 +94,10 @@ $(function() {
             }
         },
         close: function(event) {
-            config.lylist = selectData.join(',');
-            drawecharts(config);
+            if (selectData.length > 0) {
+                config.lylist = selectData.join(',');
+                drawecharts(config);
+            }
             console.log("下拉选框1关闭触发事件!", selectData.join(','));
         }
     });
@@ -126,8 +128,10 @@ $(function() {
         },
         close: function(event) {
             console.log("下拉选框2关闭触发事件!", selectData.join(','));
-            config.lylist = selectData.join(',');
-            drawecharts(config);
+            if (selectData.length > 0) {
+                config.lylist = selectData.join(',');
+                drawecharts(config);
+            }
         }
     });
     /**

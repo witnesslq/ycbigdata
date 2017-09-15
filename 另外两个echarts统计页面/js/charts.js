@@ -83,8 +83,6 @@ $(function() {
             var checkValue = $.map(checkedItems, function(item) {
                 return item.value;
             });
-            selectData = checkValue;
-            console.log(selectData);
             return numChecked + '个被选择';
         },
         click: function(event, ui) {
@@ -92,13 +90,17 @@ $(function() {
                 alert("你最多可以选择4个选项!");
                 return false;
             }
+            selectData = $.map($(this).multiselect("widget").find("input:checked"), function(item) {
+                return item.value;
+            });
         },
         close: function(event) {
             if (selectData.length > 0) {
                 config.lylist = selectData.join(',');
                 drawecharts(config);
+            } else {
+                config.lylist = '';
             }
-            console.log("下拉选框1关闭触发事件!", selectData.join(','));
         }
     });
     /**
@@ -116,8 +118,6 @@ $(function() {
             var checkValue = $.map(checkedItems, function(item) {
                 return item.value;
             });
-            selectData = checkValue;
-            console.log(selectData);
             return numChecked + '个被选择';
         },
         click: function(event, ui) {
@@ -125,12 +125,16 @@ $(function() {
                 alert("你最多可以选择4个选项!");
                 return false;
             }
+            selectData = $.map($(this).multiselect("widget").find("input:checked"), function(item) {
+                return item.value;
+            });
         },
         close: function(event) {
-            console.log("下拉选框2关闭触发事件!", selectData.join(','));
             if (selectData.length > 0) {
                 config.lylist = selectData.join(',');
                 drawecharts(config);
+            } else {
+                config.lylist = '';
             }
         }
     });

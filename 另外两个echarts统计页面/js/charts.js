@@ -4,7 +4,7 @@ $(function() {
     var config = {
         timetype: "1", // 1.周2.月3.年
         is_open_share: "1", // 使用途径1.开发2.共享
-        yyfs: "1", // 1.下载量2.访问量
+        yyfs: "2", // 1.下载量2.访问量
         sjtype: "1", // 1.目录2.接口
         lylist: selected.join(',') // 默认选中项
     };
@@ -26,6 +26,22 @@ $(function() {
             selectData = [];
         }
     }
+
+    function disabledTyperadio(val) {
+        // 使用方式触发事件
+        if (val == 1) {
+            // $('#radio-5').attr('disabled', false);
+            // $('#radio-6').attr('disabled', false);
+            $('#radio-5').iCheck('enable');
+            $('#radio-6').iCheck('enable');
+        } else {
+            // $('#radio-5').attr('disabled', false);
+            // $('#radio-6').attr('disabled', true);
+            $('#radio-5').iCheck('check');
+            $('#radio-6').iCheck('disable');
+
+        }
+    }
     /**
      * 给radio绑定事件
      */
@@ -33,17 +49,18 @@ $(function() {
         //ifCreated 事件应该在插件初始化之前绑定 
         switch (event.target.getAttribute('groupindex')) {
             case '1':
-                console.log('使用途径触发事件', event.target.value);
+                // console.log('使用途径触发事件', event.target.value);
                 config.is_open_share = event.target.value;
                 drawecharts(config);
                 break;
             case '2':
-                console.log('使用方式触发事件');
+                // console.log('使用方式触发事件');
+                disabledTyperadio(event.target.value);
                 config.yyfs = event.target.value;
                 drawecharts(config);
                 break;
             case '3':
-                console.log('数据类别触发事件');
+                // console.log('数据类别触发事件');
                 config.sjtype = event.target.value;
                 drawecharts(config);
                 break;
@@ -51,14 +68,14 @@ $(function() {
                 toggleDisable(event.target.value);
                 break;
             case '5':
-                console.log('时间查看触发事件', event.target.value);
+                // console.log('时间查看触发事件', event.target.value);
                 config.timetype = event.target.value;
                 drawecharts(config);
                 break;
             default:
                 break;
         }
-        console.log(config);
+        // console.log(config);
     });
     /**
      * 初始化icheck

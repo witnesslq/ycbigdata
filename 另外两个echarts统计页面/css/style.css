@@ -56,7 +56,7 @@ label{
     padding-right:22px;
 }
 .echarts {
-    width: 1134px;
+    width: 100%;
     height: 645px;
     margin-bottom: 100px ;
 }

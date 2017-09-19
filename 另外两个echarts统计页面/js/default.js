@@ -3,7 +3,8 @@ $(function() {
     var config = {
         timetype: '1',
         is_open_share: '1', // 使用途径1.开发2.共享
-        sjtype: '1' // 1.目录2.接口
+        sjtype: '1', // 1.目录2.接口
+        yyfs: ''
     };
     /**
      * 给radio绑定事件
@@ -19,6 +20,11 @@ $(function() {
             case '2':
                 console.log('数据类别触发事件');
                 config.sjtype = event.target.value;
+                if (event.target.value == 1) {
+                    config.yyfs = '';
+                } else {
+                    config.yyfs = '2';
+                }
                 drawchart(config);
                 break;
             case '3':
@@ -117,18 +123,22 @@ $(function() {
         });
         $.ajax({
             type: "POST",
-            url: URL + "/ShareApi/selxx",
+            url: URL + "/ShareApi/selxx_top",
             data: config,
             success: function(data) {
                 var echartData = JSON.parse(data);
-                chartOption.legend.data = echartData.lastxx.legend;
-                chartOption.yAxis.data = echartData.lastxx.y;
+                console.log(echartData);
+                chartOption.legend.data = echartData.lastxx.legend || [];
+                chartOption.yAxis.data = echartData.lastxx.y || [];
                 var series = echartData.lastxx.series;
                 $.map(series, function(item) {
                     item.type = 'bar';
+                    item.data = item.data || [];
                 });
                 chartOption.series = series;
+                console.log(chartOption);
                 chartOne.hideLoading();
+                chartOne.clear();
                 chartOne.setOption(chartOption);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {}

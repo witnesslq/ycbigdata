@@ -305,6 +305,7 @@ $(function() {
                 });
                 chartOption.series = series;
                 chartOne.hideLoading();
+                chartOne.clear();
                 chartOne.setOption(chartOption);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

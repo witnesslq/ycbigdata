@@ -296,7 +296,7 @@ $(function() {
             data: config,
             success: function(data) {
                 var echartData = JSON.parse(data);
-                chartOption.legend.data = echartData.lastxx.legend;
+                chartOption.legend.data = echartData.lastxx.legend || [];
                 chartOption.xAxis[0].data = echartData.lastxx.x;
                 chartOption.yAxis[0].name = echartData.lastxx.y[0].name + '(单位：次)';
                 var series = echartData.lastxx.series;
